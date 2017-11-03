@@ -8,7 +8,7 @@ import io.reactivex.Observable
 
 class NewsFeedPresenter {
 
-    fun fetchLastestNews(): Observable<NewsFeedViewModel> {
+    fun fetchLastestNews(): Observable<NewsFeedRowModel> {
         return Observable.empty()
     }
 
