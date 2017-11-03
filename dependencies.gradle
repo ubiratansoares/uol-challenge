@@ -33,9 +33,9 @@ ext {
     ]
 
     domainTestDependencies = [
-            junit  : "junit:junit:${jUnitVersion}",
-            mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
-            assertj: "org.assertj:assertj-core:${assertJVersion}"
+            junit        : "junit:junit:${jUnitVersion}",
+            mockito      : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            assertj      : "org.assertj:assertj-core:${assertJVersion}",
     ]
 
     dataDependencies = [
@@ -51,6 +51,7 @@ ext {
             junit  : "junit:junit:${jUnitVersion}",
             assertj: "org.assertj:assertj-core:${assertJVersion}",
             mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
     ]
 
     presentationDependencies = [

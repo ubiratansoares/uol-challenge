@@ -16,6 +16,7 @@ dependencies {
     testImplementation dataTestDependencies.junit
     testImplementation dataTestDependencies.assertj
     testImplementation dataTestDependencies.mockito
+    testImplementation dataTestDependencies.mockWebServer
 
 }
 

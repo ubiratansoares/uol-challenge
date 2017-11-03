@@ -8,6 +8,6 @@ sealed class CommunicationError : Throwable() {
 
     class InternetUnavailable : CommunicationError()
     class NetworkingHippcup : CommunicationError()
-    class SlowConnection : CommunicationError()
+    class Slow : CommunicationError()
 
 }

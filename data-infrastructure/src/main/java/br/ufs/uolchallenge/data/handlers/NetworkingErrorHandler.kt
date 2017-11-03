@@ -29,7 +29,7 @@ class NetworkingErrorHandler<T> : ObservableTransformer<T, T> {
     }
 
     private fun mapToDomainError(throwable: Throwable): Throwable {
-        if (isConnectionTimeout(throwable)) return SlowConnection()
+        if (isConnectionTimeout(throwable)) return Slow()
         if (noInternetAvailable(throwable)) return InternetUnavailable()
         return NetworkingHippcup()
     }

@@ -1,24 +1,31 @@
 package br.ufs.uolchallenge.data.rest
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by bira on 11/3/17.
  */
 object WebServiceFactory {
 
-    fun create(debuggable: Boolean): UOLWebService {
+    val DEFAULT_TIMEOUT_SECONDS = 15L
 
-        val httpClient = makeHttpClient(debuggable)
+    fun create(
+            apiURL: String = UOLWebService.BASE_URL,
+            debuggable: Boolean = false): UOLWebService {
+
+        val logger = createLogger(debuggable)
+        val httpClient = createHttpClient(logger = logger)
         val converter = GsonConverterFactory.create()
         val rxAdapter = RxJava2CallAdapterFactory.create()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(UOLWebService.BASE_URL)
+                .baseUrl(apiURL)
                 .client(httpClient)
                 .addConverterFactory(converter)
                 .addCallAdapterFactory(rxAdapter)
@@ -27,18 +34,24 @@ object WebServiceFactory {
         return retrofit.create(UOLWebService::class.java)
     }
 
-    private fun makeHttpClient(debuggable: Boolean): OkHttpClient {
+    private fun createLogger(debuggable: Boolean): Interceptor {
+        val loggingLevel = if (debuggable) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
+
+        val logger = HttpLoggingInterceptor()
+        logger.level = loggingLevel
+        return logger
+    }
+
+    private fun createHttpClient(logger: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
-                .addInterceptor(makeLoggingInterceptor(debuggable))
+                .addInterceptor(logger)
+                .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .build()
     }
 
-    private fun makeLoggingInterceptor(debuggable: Boolean): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor()
-        logging.level = if (debuggable)
-            HttpLoggingInterceptor.Level.BODY
-        else
-            HttpLoggingInterceptor.Level.NONE
-        return logging
-    }
 }

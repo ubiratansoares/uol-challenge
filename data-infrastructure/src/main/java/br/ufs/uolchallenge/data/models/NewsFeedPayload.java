@@ -8,6 +8,6 @@ import java.util.List;
 
 public class NewsFeedPayload {
 
-    public List<NewsFeedPayload> feed;
+    public List<NewsContentPayload> feed;
 
 }

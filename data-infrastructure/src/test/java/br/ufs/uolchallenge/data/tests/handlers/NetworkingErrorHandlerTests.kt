@@ -44,7 +44,7 @@ class NetworkingErrorHandlerTests {
         val timeout: DataFlow = Observable.error(SocketTimeoutException())
         timeout.compose(handler)
                 .test()
-                .assertError(SlowConnection::class.java)
+                .assertError(Slow::class.java)
     }
 
     @Test fun `should not handle other errors`() {
