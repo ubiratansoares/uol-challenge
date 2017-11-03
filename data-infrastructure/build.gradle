@@ -8,7 +8,14 @@ dependencies {
     implementation project(':domain')
     implementation dataDependencies.kotlin
     implementation dataDependencies.rxJava
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitRxJavaAdapter
+    implementation dataDependencies.retrofitGsonConverter
+    implementation dataDependencies.okHttpLogger
+
     testImplementation dataTestDependencies.junit
+    testImplementation dataTestDependencies.assertj
+    testImplementation dataTestDependencies.mockito
 
 }
 

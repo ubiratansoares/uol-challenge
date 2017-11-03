@@ -10,7 +10,7 @@ import io.reactivex.Observable
 class NewsInfrastructure : FetchNewsFeed {
 
     override fun latestNews(): Observable<News> {
-        TODO("not implemented")
+        return Observable.empty()
     }
 
 }
