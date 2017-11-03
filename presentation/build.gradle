@@ -1,0 +1,26 @@
+apply plugin: 'kotlin'
+
+dependencies {
+
+    implementation project(':domain')
+
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+    implementation presentationDependencies.kotlin
+    implementation presentationDependencies.rxJava
+
+    testImplementation presentationTestDependencies.junit
+
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = rootProject.ext.kotlinJVMTarget
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = rootProject.ext.kotlinJVMTarget
+    }
+}

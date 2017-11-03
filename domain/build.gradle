@@ -1,0 +1,24 @@
+apply plugin: 'kotlin'
+
+dependencies {
+
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
+
+    implementation domainDependencies.kotlin
+    implementation domainDependencies.rxJava
+
+    testImplementation domainTestDependencies.junit
+
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = rootProject.ext.kotlinJVMTarget
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = rootProject.ext.kotlinJVMTarget
+    }
+}

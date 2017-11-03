@@ -1,0 +1,71 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+
+    //Android Project Targets
+    minSDK = 15
+    targetSDK = 26
+    compileSDK = 26
+
+    // Kotlin Support
+    kotlinJVMTarget = "1.6"
+    kotlinVersion = '1.1.51'
+
+    //Libraries
+    rxJavaVersion = '2.1.1'
+    rxAndroidVersion = '2.0.1'
+    supportLibraryVersion = '26.1.0'
+
+    //Testing
+    jUnitVersion = '4.12'
+    assertJVersion = '3.8.0'
+    mockitoKotlinVersion = '1.5.0'
+
+    domainDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            rxJava: "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    ]
+
+    domainTestDependencies = [
+            junit  : "junit:junit:${jUnitVersion}",
+            mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            assertj: "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    dataDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            rxJava: "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    ]
+
+    dataTestDependencies = [
+            junit  : "junit:junit:${jUnitVersion}",
+            assertj: "org.assertj:assertj-core:${assertJVersion}",
+            mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+    ]
+
+    presentationDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            rxJava: "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+    ]
+
+    presentationTestDependencies = [
+            junit  : "junit:junit:${jUnitVersion}",
+            mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            assertj: "org.assertj:assertj-core:${assertJVersion}"
+    ]
+
+    mobileUIDependencies = [
+            kotlin   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            appCompat: "com.android.support:appcompat-v7:${supportLibraryVersion}",
+    ]
+
+    mobileUITestDependencies = [
+            kotlin   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            junit  : "junit:junit:${jUnitVersion}",
+    ]
+
+}
