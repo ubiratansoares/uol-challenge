@@ -1,3 +1,5 @@
+[![Build Status](https://circleci.com/gh/ubiratansoares/uol-challenge.svg?style=shield&circle-token=751be712397ecf47211bbcb2fafbd0286e7620fc)](https://circleci.com/gh/ubiratansoares/uol-challenge)
+
 # UOL Challenge
 
 <img src="https://pbs.twimg.com/profile_images/848939001419628544/fhuqbWxL_400x400.jpg"
