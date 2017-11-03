@@ -8,7 +8,7 @@ import java.util.*
 
 data class News(
         val title: String,
-        val publicationDateTime: Date,
+        val updateDateTime: Date,
         val sharableURL: String,
         val visualizationContentURL: String,
         val relatedImageURL: String

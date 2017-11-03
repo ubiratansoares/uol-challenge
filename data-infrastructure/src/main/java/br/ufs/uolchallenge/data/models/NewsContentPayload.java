@@ -13,7 +13,7 @@ public class NewsContentPayload {
     @SerializedName("title") public String title;
     @SerializedName("share-url") public String shareURL;
     @SerializedName("webview-url") public String webviewURL;
-    @SerializedName("updated") @Nullable public long updatedAt;
-    @SerializedName("thumb") public String thumbURL;
+    @SerializedName("updated") public long updatedAt;
+    @SerializedName("thumb") @Nullable public String thumbURL;
 
 }

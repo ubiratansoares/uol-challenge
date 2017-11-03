@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.data.tests
+package br.ufs.uolchallenge.data.tests.handlers
 
 import br.ufs.uolchallenge.data.handlers.NetworkingErrorHandler
 import br.ufs.uolchallenge.domain.CommunicationError
