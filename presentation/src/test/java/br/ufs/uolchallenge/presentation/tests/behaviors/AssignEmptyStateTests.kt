@@ -63,6 +63,8 @@ class AssignEmptyStateTests {
         Observable.error<Any>(DataAccessError.RemoteSystemDown())
                 .compose(emptyStateAssigner)
                 .subscribe({}, {}, {})
+
+        `verify hidden at start and no more displayed`()
     }
 
     @Test fun `should show empty state when content not found`() {

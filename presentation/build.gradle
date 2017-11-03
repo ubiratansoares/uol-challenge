@@ -25,3 +25,12 @@ compileTestKotlin {
         jvmTarget = rootProject.ext.kotlinJVMTarget
     }
 }
+
+configurations.all {
+    resolutionStrategy {
+        forcedModules = [
+                "org.jetbrains.kotlin:kotlin-stdlib:${rootProject.ext.kotlinVersion}",
+                "org.jetbrains.kotlin:kotlin-reflect:${rootProject.ext.kotlinVersion}"
+        ]
+    }
+}
