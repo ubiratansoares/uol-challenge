@@ -1,6 +1,6 @@
 # UOL Challenge
 
-<img src="https://github.com/ubiratansoares/uol-challenge/github/uol-challenge.jpg"
+<img src="https://pbs.twimg.com/profile_images/848939001419628544/fhuqbWxL_400x400.jpg"
  alt="UOL" align="right" />
  
  
