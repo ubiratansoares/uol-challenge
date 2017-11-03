@@ -11,6 +11,7 @@ dependencies {
     implementation presentationDependencies.rxJava
 
     testImplementation presentationTestDependencies.junit
+    testImplementation presentationTestDependencies.mockito
 
 }
 
