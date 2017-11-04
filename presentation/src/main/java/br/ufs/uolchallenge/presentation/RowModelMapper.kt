@@ -19,7 +19,7 @@ class RowModelMapper {
         if (item.relatedImageURL != News.NO_IMAGE_AVAILABLE) {
             val resized = imageScaler.resize(item.relatedImageURL)
 
-            return NewsFeedEntry.EntryWithImage(
+            return NewsFeedEntry.WithImage(
                     title = item.title,
                     shareableURL = item.sharableURL,
                     visualizationURL = item.visualizationContentURL,
@@ -28,7 +28,7 @@ class RowModelMapper {
             )
         }
 
-        return NewsFeedEntry.PlainEntry(
+        return NewsFeedEntry.Plain(
                 title = item.title,
                 shareableURL = item.sharableURL,
                 visualizationURL = item.visualizationContentURL,

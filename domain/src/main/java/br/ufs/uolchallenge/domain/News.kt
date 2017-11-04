@@ -11,7 +11,7 @@ data class News(
         val updateDateTime: Date,
         val sharableURL: String,
         val visualizationContentURL: String,
-        val relatedImageURL: String
+        val relatedImageURL: String = NO_IMAGE_AVAILABLE
 ) {
     companion object {
         val NO_IMAGE_AVAILABLE = "http://no.image.available.jpg"

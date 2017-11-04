@@ -25,4 +25,5 @@ class ImageScalerTests {
         assertThat(scaled).contains(ImageScaler.DEFAULT_SIZE)
         assertThat(scaled).doesNotContain("142x100")
     }
+
 }
