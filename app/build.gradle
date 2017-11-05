@@ -11,16 +11,19 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-kapt {
-    correctErrorTypes = true
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -42,6 +45,8 @@ dependencies {
     implementation mobileUIDependencies.picasso
 
     testImplementation mobileUITestDependencies.junit
+    testImplementation mobileUITestDependencies.assertj
+    testImplementation mobileUITestDependencies.roboletric
 }
 
 configurations.all {

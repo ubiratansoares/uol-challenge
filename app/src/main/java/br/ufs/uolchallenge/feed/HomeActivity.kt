@@ -64,6 +64,10 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
         setContentView(R.layout.activity_home)
         setup()
+    }
+
+    override fun onResume() {
+        super.onResume()
         fetchNews()
     }
 
@@ -130,7 +134,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         feedview.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun showNewsFeed(items: MutableList<NewsFeedEntry>) {
+    fun showNewsFeed(items: List<NewsFeedEntry>) {
         feedview.adapter = NewsFeedAdapter(items)
     }
 

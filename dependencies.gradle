@@ -27,6 +27,7 @@ ext {
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
     mockitoKotlinVersion = '1.5.0'
+    roboletricVersion = '3.4.2'
 
     domainDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
@@ -81,6 +82,9 @@ ext {
     mobileUITestDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
             junit : "junit:junit:${jUnitVersion}",
+            assertj: "org.assertj:assertj-core:${assertJVersion}",
+            roboletric: "org.robolectric:robolectric:${roboletricVersion}"
+
     ]
 
 }
