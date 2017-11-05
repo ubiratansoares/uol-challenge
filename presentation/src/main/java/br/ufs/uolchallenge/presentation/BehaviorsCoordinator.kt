@@ -4,6 +4,7 @@ import br.ufs.uolchallenge.presentation.behaviors.emptystate.AssignEmptyState
 import br.ufs.uolchallenge.presentation.behaviors.errorstate.AssignErrorState
 import br.ufs.uolchallenge.presentation.behaviors.loading.LoadingCoordination
 import br.ufs.uolchallenge.presentation.behaviors.networking.NetworkingErrorFeedback
+import br.ufs.uolchallenge.presentation.behaviors.refresh.RefreshToogle
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
@@ -16,7 +17,8 @@ class BehaviorsCoordinator<T> internal constructor(
         val showEmptyState: AssignEmptyState<T>,
         val showErrorState: AssignErrorState<T>,
         val networkingFeedback: NetworkingErrorFeedback<T>,
-        val loadingCoordination: LoadingCoordination<T>) : ObservableTransformer<T, T> {
+        val loadingCoordination: LoadingCoordination<T>,
+        val toogleRefresh: RefreshToogle<T>) : ObservableTransformer<T, T> {
 
     override fun apply(upstream: Observable<T>): ObservableSource<T> {
         return upstream
@@ -24,5 +26,6 @@ class BehaviorsCoordinator<T> internal constructor(
                 .compose(showErrorState)
                 .compose(networkingFeedback)
                 .compose(loadingCoordination)
+                .compose(toogleRefresh)
     }
 }

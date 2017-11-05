@@ -1,5 +1,6 @@
 package br.ufs.uolchallenge
 
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -28,6 +29,7 @@ class NewsFeedActivityTests {
     lateinit var feedbackContainer: View
     lateinit var errorImage: ImageView
     lateinit var errorLabel: TextView
+    lateinit var fab: FloatingActionButton
 
     @Before fun `before each test`() {
         activity = Robolectric.buildActivity(HomeActivity::class.java).create().get()
@@ -36,6 +38,7 @@ class NewsFeedActivityTests {
         feedbackContainer = activity.feedbackContainer
         errorImage = activity.errorImage
         errorLabel = activity.errorMessage
+        fab = activity.fab
     }
 
     @Test fun `should setup views properly at screen creation`() {
@@ -82,6 +85,14 @@ class NewsFeedActivityTests {
 
         activity.hideErrorState().run()
         `error views should be reseted`()
+    }
+
+    @Test fun `should dispatch actions for refresh option`() {
+        activity.disableRefresh().run()
+        `refresh option should not be visible`()
+
+        activity.enableRefresh().run()
+        `refresh option should be visible`()
     }
 
     @Test fun `should fill adapter when data arrives`() {
@@ -139,6 +150,14 @@ class NewsFeedActivityTests {
 
     private fun `error related views should not be visible`() {
         assertThat(feedbackContainer.visibility).isEqualTo(View.GONE)
+    }
+
+    private fun `refresh option should be visible`() {
+        assertThat(fab.visibility).isEqualTo(View.VISIBLE)
+    }
+
+    private fun `refresh option should not be visible`() {
+        assertThat(fab.visibility).isEqualTo(View.GONE)
     }
 
     private fun `recycler view should have layout manager attached`() {

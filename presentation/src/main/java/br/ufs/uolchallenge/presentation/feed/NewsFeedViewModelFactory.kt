@@ -10,13 +10,14 @@ import br.ufs.uolchallenge.presentation.behaviors.emptystate.AssignEmptyState
 import br.ufs.uolchallenge.presentation.behaviors.errorstate.AssignErrorState
 import br.ufs.uolchallenge.presentation.behaviors.loading.LoadingCoordination
 import br.ufs.uolchallenge.presentation.behaviors.networking.NetworkingErrorFeedback
+import br.ufs.uolchallenge.presentation.behaviors.refresh.RefreshToogle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by bira on 11/5/17.
  */
-class NewsFeedViewModelFactory(val passiveView: NewsFeedView) : ViewModelProvider.Factory {
+class NewsFeedViewModelFactory(private val passiveView: NewsFeedView) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>?): T {
 
@@ -27,6 +28,7 @@ class NewsFeedViewModelFactory(val passiveView: NewsFeedView) : ViewModelProvide
         val errorState = AssignErrorState<News>(passiveView, uiScheduler)
         val loadingContent = LoadingCoordination<News>(passiveView, uiScheduler)
         val networkingFeedback = NetworkingErrorFeedback<News>(passiveView, uiScheduler)
+        val refresher = RefreshToogle<News>(passiveView, uiScheduler)
         val webservice = WebServiceFactory.create(debuggable = true)
         val infrastructure = NewsInfrastructure(webservice, ioScheduler)
 
@@ -34,7 +36,8 @@ class NewsFeedViewModelFactory(val passiveView: NewsFeedView) : ViewModelProvide
                 showEmptyState = emptyState,
                 showErrorState = errorState,
                 networkingFeedback = networkingFeedback,
-                loadingCoordination = loadingContent
+                loadingCoordination = loadingContent,
+                toogleRefresh = refresher
         )
 
         return NewsFeedViewModel(infrastructure, coordinator) as T

@@ -47,7 +47,7 @@ class LoadingCoordinationTests {
                 .compose(loadingCoordination)
                 .subscribe()
 
-        checkLoadingCoordinated()
+        `checking loading coordinated`()
     }
 
     @Test fun `should coordinate loading when flow is empty`() {
@@ -55,7 +55,7 @@ class LoadingCoordinationTests {
                 .compose(loadingCoordination)
                 .subscribe()
 
-        checkLoadingCoordinated()
+        `checking loading coordinated`()
     }
 
     @Test fun `should coordinate loading when flow signal error`() {
@@ -63,10 +63,10 @@ class LoadingCoordinationTests {
                 .compose(loadingCoordination)
                 .subscribe({}, {}, {})
 
-        checkLoadingCoordinated()
+        `checking loading coordinated`()
     }
 
-    private fun checkLoadingCoordinated() {
+    private fun `checking loading coordinated`() {
         val inOrder = Mockito.inOrder(showAction, hideAction)
         inOrder.verify(showAction).run()
         inOrder.verify(hideAction).run()

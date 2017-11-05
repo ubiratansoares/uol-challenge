@@ -8,6 +8,7 @@ import br.ufs.uolchallenge.presentation.RowModelMapper
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import io.reactivex.Observable
 import io.reactivex.internal.operators.observable.ObservableNever
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by bira on 11/3/17.

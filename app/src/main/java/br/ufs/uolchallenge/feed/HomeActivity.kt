@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar.LENGTH_INDEFINITE
 import android.support.design.widget.Snackbar.make
 import android.support.v7.app.AppCompatActivity
@@ -37,6 +38,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     val feedbackContainer by bindView<View>(R.id.feedbackContainer)
     val errorImage by bindView<ImageView>(R.id.errorImage)
     val errorMessage by bindView<TextView>(R.id.errorMessage)
+    val fab by bindView<FloatingActionButton>(R.id.fab)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +90,14 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         return resetErrorContainer()
     }
 
+    override fun disableRefresh(): Action {
+        return Action { fab.visibility = View.GONE }
+    }
+
+    override fun enableRefresh(): Action {
+        return Action { fab.visibility = View.VISIBLE }
+    }
+
     private fun feedback(errorImageResource: Int, errorMessageResource: Int) {
         feedbackContainer.visibility = View.VISIBLE
         errorImage.setImageResource(errorImageResource)
@@ -117,6 +127,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     private fun setup() {
         retrieveViewModel()
         setupRecyclerView()
+        fab.setOnClickListener { fetchForcingUpdate() }
     }
 
     private fun setupRecyclerView() {
@@ -138,12 +149,15 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     private fun showCallToAction(callToActionText: Int) {
         make(screenRoot, callToActionText, LENGTH_INDEFINITE)
-                .setAction(R.string.snackaction_retry, {
-                    releaseSubscriptions()
-                    fetchNews(true)
-                    resetErrorContainer()
-                })
+                .setAction(R.string.snackaction_retry, { fetchForcingUpdate() })
                 .show()
+    }
+
+    private fun fetchForcingUpdate() {
+        releaseSubscriptions()
+        fetchNews(true)
+        resetErrorContainer()
+        feedview.adapter = null
     }
 
     private fun resetErrorContainer(): Action {
