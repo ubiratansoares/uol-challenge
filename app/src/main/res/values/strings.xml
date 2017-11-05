@@ -6,4 +6,5 @@
     <string name="snacktext_internet_connection">Verifique sua conexão com a internet</string>
     <string name="snackaction_retry">TENTAR NOVAMENTE</string>
     <string name="snacktext_server_down">Esse problema deverá estar solucionado em breve</string>
+    <string name="title_activity_display_news">Notícia</string>
 </resources>

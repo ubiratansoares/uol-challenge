@@ -1,7 +1,6 @@
 package br.ufs.uolchallenge.feed
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import br.ufs.uolchallenge.R
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry.Plain
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry.WithImage
+import br.ufs.uolchallenge.util.Navigator
 import br.ufs.uolchallenge.util.bindView
 import com.squareup.picasso.Picasso
 
@@ -59,11 +59,14 @@ class PlainCard(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val titleLabel by bindView<TextView>(R.id.titleLabel)
     val dateLabel by bindView<TextView>(R.id.dateLabel)
     val container by bindView<View>(R.id.container)
+    val context = itemView.context
 
     fun bind(model: Plain) {
         titleLabel.text = model.title
         dateLabel.text = model.formmatedDate
-        container.setOnClickListener { Log.d("Adapter", "Clicked") }
+        container.setOnClickListener {
+            Navigator.toDisplayNews(context, model.shareableURL, model.visualizationURL)
+        }
     }
 
 }
@@ -74,11 +77,14 @@ class CardWithImage(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val dateLabel by bindView<TextView>(R.id.dateLabel)
     val newsImage by bindView<ImageView>(R.id.newsImage)
     val container by bindView<View>(R.id.container)
+    val context = itemView.context
 
     fun bind(model: WithImage) {
         titleLabel.text = model.title
         dateLabel.text = model.formmatedDate
-        container.setOnClickListener { Log.d("Adapter", "Clicked") }
+        container.setOnClickListener {
+            Navigator.toDisplayNews(context, model.shareableURL, model.visualizationURL)
+        }
 
         Picasso.with(itemView.context)
                 .load(model.dimensionedImageURL)

@@ -8,14 +8,16 @@ sealed class NewsFeedEntry {
 
     data class Plain(
             val title: String,
+            val formmatedDate: String,
             val shareableURL: String,
-            val visualizationURL: String,
-            val formmatedDate: String) : NewsFeedEntry()
+            val visualizationURL: String) : NewsFeedEntry()
 
     data class WithImage(
             val title: String,
-            val shareableURL: String,
-            val visualizationURL: String,
             val formmatedDate: String,
-            val dimensionedImageURL: String) : NewsFeedEntry()
+            val dimensionedImageURL: String,
+            val shareableURL: String,
+            val visualizationURL: String) : NewsFeedEntry()
+
+
 }
