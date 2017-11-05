@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_margin="@dimen/eight_dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/eight_dp">
+
+        <TextView
+            android:id="@+id/titleLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:text="Dorival destaca evolução do SP, mas ainda vê time em débito no Brasileiro" />
+
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/eight_dp"
+            android:textStyle="italic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="atualizada em 04/11 às 22h22" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

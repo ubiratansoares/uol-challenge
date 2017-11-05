@@ -10,6 +10,7 @@ ext {
     minSDK = 21
     targetSDK = 26
     compileSDK = 26
+    buildToolsVersion = '26.0.2'
 
     // Kotlin Support
     kotlinJVMTarget = "1.6"
@@ -21,6 +22,8 @@ ext {
     rxJavaVersion = '2.1.1'
     rxAndroidVersion = '2.0.1'
     supportLibraryVersion = '26.1.0'
+    archComponentsVersion = '1.0.3'
+    archExtensionsVersion = '1.0.0-alpha9-1'
     picassoVersion = "2.5.2"
 
     //Testing
@@ -28,6 +31,11 @@ ext {
     assertJVersion = '3.8.0'
     mockitoKotlinVersion = '1.5.0'
     roboletricVersion = '3.4.2'
+
+    forceResolution = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    ]
 
     domainDependencies = [
             kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
@@ -57,8 +65,13 @@ ext {
     ]
 
     presentationDependencies = [
-            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            rxJava: "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            archRuntime   : "android.arch.lifecycle:runtime:${archComponentsVersion}",
+            archExtensions: "android.arch.lifecycle:extensions:${archExtensionsVersion}",
+            archCompiler  : "android.arch.lifecycle:compiler:${archExtensionsVersion}",
     ]
 
     presentationTestDependencies = [
@@ -68,23 +81,26 @@ ext {
     ]
 
     mobileUIDependencies = [
-            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            rxJava      : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid   : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            appCompat   : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-            cardView    : "com.android.support:cardview-v7:${supportLibraryVersion}",
-            recyclerView: "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            design      : "com.android.support:design:${supportLibraryVersion}",
-            picasso     : "com.squareup.picasso:picasso:${picassoVersion}"
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            appCompat     : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            cardView      : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            recyclerView  : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            design        : "com.android.support:design:${supportLibraryVersion}",
+            archRuntime   : "android.arch.lifecycle:runtime:${archComponentsVersion}",
+            archExtensions: "android.arch.lifecycle:extensions:${archExtensionsVersion}",
+            archCompiler  : "android.arch.lifecycle:compiler:${archExtensionsVersion}",
+            picasso       : "com.squareup.picasso:picasso:${picassoVersion}"
 
     ]
 
     mobileUITestDependencies = [
-            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            junit : "junit:junit:${jUnitVersion}",
-            assertj: "org.assertj:assertj-core:${assertJVersion}",
+            kotlin    : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            junit     : "junit:junit:${jUnitVersion}",
+            assertj   : "org.assertj:assertj-core:${assertJVersion}",
             roboletric: "org.robolectric:robolectric:${roboletricVersion}"
-
     ]
 
 }

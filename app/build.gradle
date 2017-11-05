@@ -36,12 +36,15 @@ dependencies {
     def mobileUITestDependencies = rootProject.ext.mobileUITestDependencies
 
     implementation mobileUIDependencies.kotlin
+    implementation mobileUIDependencies.kotlinReflect
     implementation mobileUIDependencies.rxJava
     implementation mobileUIDependencies.rxAndroid
     implementation mobileUIDependencies.appCompat
     implementation mobileUIDependencies.cardView
     implementation mobileUIDependencies.recyclerView
     implementation mobileUIDependencies.design
+    implementation mobileUIDependencies.archRuntime
+    implementation mobileUIDependencies.archExtensions
     implementation mobileUIDependencies.picasso
 
     testImplementation mobileUITestDependencies.junit
@@ -52,8 +55,8 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         forcedModules = [
-                "org.jetbrains.kotlin:kotlin-stdlib:${rootProject.ext.kotlinVersion}",
-                "org.jetbrains.kotlin:kotlin-reflect:${rootProject.ext.kotlinVersion}"
+                rootProject.ext.forceResolution.kotlin,
+                rootProject.ext.forceResolution.kotlinReflect
         ]
     }
 }

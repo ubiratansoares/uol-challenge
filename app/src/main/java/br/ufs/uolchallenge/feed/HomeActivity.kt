@@ -1,5 +1,8 @@
 package br.ufs.uolchallenge.feed
 
+import android.arch.lifecycle.ViewModelProviders
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.support.design.widget.Snackbar.LENGTH_INDEFINITE
 import android.support.design.widget.Snackbar.make
@@ -12,29 +15,20 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.ufs.uolchallenge.R
-import br.ufs.uolchallenge.data.NewsInfrastructure
-import br.ufs.uolchallenge.data.rest.WebServiceFactory
-import br.ufs.uolchallenge.domain.News
-import br.ufs.uolchallenge.presentation.BehaviorsCoordinator
-import br.ufs.uolchallenge.presentation.behaviors.emptystate.AssignEmptyState
-import br.ufs.uolchallenge.presentation.behaviors.errorstate.AssignErrorState
-import br.ufs.uolchallenge.presentation.behaviors.loading.LoadingCoordination
-import br.ufs.uolchallenge.presentation.behaviors.networking.NetworkingErrorFeedback
 import br.ufs.uolchallenge.presentation.feed.NewsFeedView
 import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModel
+import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModelFactory
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import br.ufs.uolchallenge.util.bindView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
-import io.reactivex.schedulers.Schedulers
 
 class HomeActivity : AppCompatActivity(), NewsFeedView {
 
-    val uiScheduler = AndroidSchedulers.mainThread()
-    val ioScheduler = Schedulers.io()
 
-    lateinit var presenter: NewsFeedViewModel
+    lateinit var viewModel: NewsFeedViewModel
+    val uiScheduler = AndroidSchedulers.mainThread()
     val composite = CompositeDisposable()
 
     val screenRoot by bindView<View>(R.id.screenRoot)
@@ -46,22 +40,6 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val emptyState = AssignEmptyState<News>(this, uiScheduler)
-        val errorState = AssignErrorState<News>(this, uiScheduler)
-        val loadingContent = LoadingCoordination<News>(this, uiScheduler)
-        val networkingFeedback = NetworkingErrorFeedback<News>(this, uiScheduler)
-        val webservice = WebServiceFactory.create()
-        val infrastructure = NewsInfrastructure(webservice, ioScheduler)
-        val coordinator = BehaviorsCoordinator(
-                showEmptyState = emptyState,
-                showErrorState = errorState,
-                networkingFeedback = networkingFeedback,
-                loadingCoordination = loadingContent
-        )
-
-        presenter = NewsFeedViewModel(infrastructure, coordinator)
-
         setContentView(R.layout.activity_home)
         setup()
     }
@@ -72,7 +50,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     }
 
     override fun onDestroy() {
-        composite.clear()
+        composite.dispose()
         super.onDestroy()
     }
 
@@ -119,7 +97,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     private fun fetchNews() {
         val items: MutableList<NewsFeedEntry> = mutableListOf()
 
-        val disposable = presenter.fetchLastestNews()
+        val disposable = viewModel.fetchLastestNews()
                 .observeOn(uiScheduler)
                 .subscribe(
                         { items.add(it) },
@@ -130,12 +108,31 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         composite.add(disposable)
     }
 
-    private fun setup() {
-        feedview.layoutManager = LinearLayoutManager(this)
-    }
 
     fun showNewsFeed(items: List<NewsFeedEntry>) {
         feedview.adapter = NewsFeedAdapter(items)
+    }
+
+    private fun setup() {
+        retrieveViewModel()
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        val orientation = resources.configuration.orientation
+
+        val listStyle = when (orientation) {
+            ORIENTATION_PORTRAIT -> LinearLayoutManager.VERTICAL
+            ORIENTATION_LANDSCAPE -> LinearLayoutManager.HORIZONTAL
+            else -> LinearLayoutManager.VERTICAL
+        }
+
+        feedview.layoutManager = LinearLayoutManager(this, listStyle, false)
+    }
+
+    private fun retrieveViewModel() {
+        val factory = NewsFeedViewModelFactory(this)
+        viewModel = ViewModelProviders.of(this, factory).get(NewsFeedViewModel::class.java)
     }
 
     private fun showCallToAction(callToActionText: Int) {
@@ -154,4 +151,5 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
             feedbackContainer.visibility = View.GONE
         }
     }
+
 }

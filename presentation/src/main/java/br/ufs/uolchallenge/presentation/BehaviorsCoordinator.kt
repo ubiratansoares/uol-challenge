@@ -12,7 +12,7 @@ import io.reactivex.ObservableTransformer
  * Created by bira on 11/3/17.
  */
 
-class BehaviorsCoordinator<T>(
+class BehaviorsCoordinator<T> internal constructor(
         val showEmptyState: AssignEmptyState<T>,
         val showErrorState: AssignErrorState<T>,
         val networkingFeedback: NetworkingErrorFeedback<T>,
