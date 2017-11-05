@@ -20,6 +20,6 @@ class ContentDateTimeFormatterTests {
         val dateTime = calendar.time
 
         val formatted = formatter.formatAsContent(dateTime)
-        assertThat(formatted).isEqualTo("25/02 às 22h:15m")
+        assertThat(formatted).isEqualTo("atualizado em 25/02 às 22h:15m")
     }
 }

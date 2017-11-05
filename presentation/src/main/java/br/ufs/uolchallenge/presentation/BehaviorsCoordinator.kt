@@ -25,5 +25,4 @@ class BehaviorsCoordinator<T>(
                 .compose(networkingFeedback)
                 .compose(loadingCoordination)
     }
-
 }
