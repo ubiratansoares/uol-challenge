@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge
+package br.ufs.uolchallenge.feed
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import br.ufs.uolchallenge.R
+import br.ufs.uolchallenge.util.bindView
 import br.ufs.uolchallenge.data.NewsInfrastructure
 import br.ufs.uolchallenge.data.rest.WebServiceFactory
 import br.ufs.uolchallenge.domain.News

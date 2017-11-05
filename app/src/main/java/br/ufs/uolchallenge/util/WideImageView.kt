@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge
+package br.ufs.uolchallenge.util
 
 import android.content.Context
 import android.util.AttributeSet

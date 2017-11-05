@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge
+package br.ufs.uolchallenge.util
 
 /**
  * Created by bira on 11/5/17.

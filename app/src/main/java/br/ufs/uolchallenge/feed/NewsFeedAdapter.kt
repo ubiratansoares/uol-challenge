@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge
+package br.ufs.uolchallenge.feed
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import br.ufs.uolchallenge.R
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry.Plain
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry.WithImage
+import br.ufs.uolchallenge.util.bindView
 import com.squareup.picasso.Picasso
 
 /**
