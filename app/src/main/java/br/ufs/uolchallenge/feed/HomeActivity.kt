@@ -26,12 +26,12 @@ import io.reactivex.functions.Action
 
 class HomeActivity : AppCompatActivity(), NewsFeedView {
 
+    private val uiScheduler = AndroidSchedulers.mainThread()
+    private val screenRoot by bindView<View>(R.id.screenRoot)
 
+    lateinit var composite: CompositeDisposable
     lateinit var viewModel: NewsFeedViewModel
-    val uiScheduler = AndroidSchedulers.mainThread()
-    val composite = CompositeDisposable()
 
-    val screenRoot by bindView<View>(R.id.screenRoot)
     val feedview by bindView<RecyclerView>(R.id.feedView)
     val loading by bindView<ProgressBar>(R.id.loading)
     val feedbackContainer by bindView<View>(R.id.feedbackContainer)
@@ -46,11 +46,11 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     override fun onResume() {
         super.onResume()
-        fetchNews()
+        fetchNews(false)
     }
 
     override fun onDestroy() {
-        composite.dispose()
+        releaseSubscriptions()
         super.onDestroy()
     }
 
@@ -94,10 +94,10 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         errorMessage.text = getString(errorMessageResource)
     }
 
-    private fun fetchNews() {
+    private fun fetchNews(forceUpdate: Boolean) {
         val items: MutableList<NewsFeedEntry> = mutableListOf()
 
-        val disposable = viewModel.fetchLastestNews()
+        val disposable = viewModel.fetchLastestNews(forceUpdate)
                 .observeOn(uiScheduler)
                 .subscribe(
                         { items.add(it) },
@@ -105,6 +105,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
                         { showNewsFeed(items) }
                 )
 
+        composite = CompositeDisposable()
         composite.add(disposable)
     }
 
@@ -121,13 +122,13 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     private fun setupRecyclerView() {
         val orientation = resources.configuration.orientation
 
-        val listStyle = when (orientation) {
+        val displayMode = when (orientation) {
             ORIENTATION_PORTRAIT -> LinearLayoutManager.VERTICAL
             ORIENTATION_LANDSCAPE -> LinearLayoutManager.HORIZONTAL
             else -> LinearLayoutManager.VERTICAL
         }
 
-        feedview.layoutManager = LinearLayoutManager(this, listStyle, false)
+        feedview.layoutManager = LinearLayoutManager(this, displayMode, false)
     }
 
     private fun retrieveViewModel() {
@@ -138,7 +139,8 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     private fun showCallToAction(callToActionText: Int) {
         make(screenRoot, callToActionText, LENGTH_INDEFINITE)
                 .setAction(R.string.snackaction_retry, {
-                    fetchNews()
+                    releaseSubscriptions()
+                    fetchNews(true)
                     resetErrorContainer()
                 })
                 .show()
@@ -150,6 +152,10 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
             errorImage.setImageResource(0)
             feedbackContainer.visibility = View.GONE
         }
+    }
+
+    private fun releaseSubscriptions() {
+        composite.clear()
     }
 
 }
