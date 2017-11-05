@@ -7,7 +7,7 @@ allprojects {
 ext {
 
     //Android Project Targets
-    minSDK = 15
+    minSDK = 21
     targetSDK = 26
     compileSDK = 26
 
@@ -73,6 +73,7 @@ ext {
             appCompat   : "com.android.support:appcompat-v7:${supportLibraryVersion}",
             cardView    : "com.android.support:cardview-v7:${supportLibraryVersion}",
             recyclerView: "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            design      : "com.android.support:design:${supportLibraryVersion}",
             picasso     : "com.squareup.picasso:picasso:${picassoVersion}"
 
     ]

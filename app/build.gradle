@@ -38,6 +38,7 @@ dependencies {
     implementation mobileUIDependencies.appCompat
     implementation mobileUIDependencies.cardView
     implementation mobileUIDependencies.recyclerView
+    implementation mobileUIDependencies.design
     implementation mobileUIDependencies.picasso
 
     testImplementation mobileUITestDependencies.junit

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">UOL Challenge</string>
+    <string name="error_not_found">Não há conteúdo disponível no momento para esse canal</string>
+    <string name="error_server_down">Há um problema com nossos servidores</string>
+    <string name="error_internet_connection">Houve um erro de comunicação</string>
+    <string name="snacktext_internet_connection">Verifique sua conexão com a internet</string>
+    <string name="snackaction_retry">TENTAR NOVAMENTE</string>
+    <string name="snacktext_server_down">Esse problema deverá estar solucionado em breve</string>
 </resources>

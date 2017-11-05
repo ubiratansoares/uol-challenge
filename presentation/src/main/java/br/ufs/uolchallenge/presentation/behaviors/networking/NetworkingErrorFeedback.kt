@@ -20,7 +20,7 @@ class NetworkingErrorFeedback<T>(
 
         if (throwable is CommunicationError) {
             Completable.fromAction(passiveView.reportNetworkingError())
-                    .observeOn(uiScheduler)
+                    .subscribeOn(uiScheduler)
                     .subscribe()
         }
 
