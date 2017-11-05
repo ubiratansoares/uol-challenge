@@ -21,6 +21,7 @@ ext {
     rxJavaVersion = '2.1.1'
     rxAndroidVersion = '2.0.1'
     supportLibraryVersion = '26.1.0'
+    picassoVersion = "2.5.2"
 
     //Testing
     jUnitVersion = '4.12'
@@ -33,9 +34,9 @@ ext {
     ]
 
     domainTestDependencies = [
-            junit        : "junit:junit:${jUnitVersion}",
-            mockito      : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
-            assertj      : "org.assertj:assertj-core:${assertJVersion}",
+            junit  : "junit:junit:${jUnitVersion}",
+            mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            assertj: "org.assertj:assertj-core:${assertJVersion}",
     ]
 
     dataDependencies = [
@@ -48,9 +49,9 @@ ext {
     ]
 
     dataTestDependencies = [
-            junit  : "junit:junit:${jUnitVersion}",
-            assertj: "org.assertj:assertj-core:${assertJVersion}",
-            mockito: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            junit        : "junit:junit:${jUnitVersion}",
+            assertj      : "org.assertj:assertj-core:${assertJVersion}",
+            mockito      : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
             mockWebServer: "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
     ]
 
@@ -66,8 +67,14 @@ ext {
     ]
 
     mobileUIDependencies = [
-            kotlin   : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            appCompat: "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            rxJava      : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid   : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            appCompat   : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            cardView    : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            recyclerView: "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            picasso     : "com.squareup.picasso:picasso:${picassoVersion}"
+
     ]
 
     mobileUITestDependencies = [

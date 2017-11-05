@@ -18,12 +18,11 @@ import io.reactivex.ObservableTransformer
 
 
 class BehaviorsCoordinator<T>(
-        val behaviors: Set<ObservableTransformer<T, T>>,
+        val behaviors: List<ObservableTransformer<T, T>>,
         val passiveView: Any) : ObservableTransformer<T, T> {
 
     override fun apply(upstream: Observable<T>): ObservableSource<T> {
-        behaviors.forEach { if (canByApplied(it, passiveView)) upstream.compose(it) }
-        return upstream
+        return upstream.compose(behaviors.first())
     }
 
     private fun canByApplied(behavior: ObservableTransformer<T, T>, view: Any): Boolean {

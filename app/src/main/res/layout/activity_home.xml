@@ -5,9 +5,19 @@
     android:layout_height="match_parent"
     tools:context="br.ufs.uolchallenge.HomeActivity">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/feedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:padding="@dimen/eight_dp"
+        tools:listitem="@layout/view_feed_entry_with_image" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:layout_gravity="center" />
 
 </FrameLayout>

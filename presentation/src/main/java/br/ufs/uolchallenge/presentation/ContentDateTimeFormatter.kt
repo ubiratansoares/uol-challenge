@@ -10,7 +10,8 @@ import java.util.*
 class ContentDateTimeFormatter {
 
     fun formatAsContent(updateDateTime: Date): String {
-        val formatter = SimpleDateFormat("dd/MM à's' HH'h':mm'm'", Locale.getDefault())
+        val format = "'atualizada em' dd/MM à's' HH'h':mm'm'"
+        val formatter = SimpleDateFormat(format, Locale.getDefault())
         return formatter.format(updateDateTime)
     }
 }

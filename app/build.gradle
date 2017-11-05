@@ -19,15 +19,26 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
 
+    implementation project(':data-infrastructure')
+    implementation project(':domain')
     implementation project(':presentation')
 
     def mobileUIDependencies = rootProject.ext.mobileUIDependencies
     def mobileUITestDependencies = rootProject.ext.mobileUITestDependencies
 
     implementation mobileUIDependencies.kotlin
+    implementation mobileUIDependencies.rxJava
+    implementation mobileUIDependencies.rxAndroid
     implementation mobileUIDependencies.appCompat
+    implementation mobileUIDependencies.cardView
+    implementation mobileUIDependencies.recyclerView
+    implementation mobileUIDependencies.picasso
 
     testImplementation mobileUITestDependencies.junit
 }

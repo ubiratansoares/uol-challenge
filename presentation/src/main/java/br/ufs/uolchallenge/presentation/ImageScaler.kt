@@ -14,10 +14,10 @@ class ImageScaler {
         val values = parts[1]
         val format = values.split("x", ".")
         val extension = format.last()
-        return "{$base}_$DEFAULT_SIZE.$extension"
+        return "${base}_$DEFAULT_SIZE.$extension"
     }
 
     companion object {
-        val DEFAULT_SIZE = "720x405"
+        val DEFAULT_SIZE = "1024x768"
     }
 }

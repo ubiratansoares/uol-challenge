@@ -6,17 +6,16 @@ package br.ufs.uolchallenge.presentation.models
 
 sealed class NewsFeedEntry {
 
-    class Plain(
+    data class Plain(
             val title: String,
             val shareableURL: String,
             val visualizationURL: String,
             val formmatedDate: String) : NewsFeedEntry()
 
-    class WithImage(
+    data class WithImage(
             val title: String,
             val shareableURL: String,
             val visualizationURL: String,
             val formmatedDate: String,
             val dimensionedImageURL: String) : NewsFeedEntry()
-
 }
