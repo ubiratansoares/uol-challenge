@@ -24,7 +24,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "presentation/build.gradle" }}-{{ checksum  "domain/build.gradle" }}-{{ checksum  "data-infrastructure/build.gradle" }}
       - store_artifacts:
           path: app/build/outputs/apk
           destination: apks
