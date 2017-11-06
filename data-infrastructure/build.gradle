@@ -38,6 +38,12 @@ android {
         disable 'InvalidPackage'
         disable 'OldTargetApi'
     }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 dependencies {

@@ -13,8 +13,8 @@ import io.reactivex.Scheduler
 /**
  * Created by bira on 11/3/17.
  */
-class NewsInfrastructure(private val webservice: UOLWebService,
-                         private val ioBoundedScheduler: Scheduler) : FetchNewsFeed {
+class NewsFeedInfrastructure(private val webservice: UOLWebService,
+                             private val ioBoundedScheduler: Scheduler) : FetchNewsFeed {
 
     private val restErrorHandler = RestErrorsHandler<NewsFeedPayload>()
     private val networkingErrorHandler = NetworkingErrorHandler<NewsFeedPayload>()

@@ -1,6 +1,6 @@
 package br.ufs.uolchallenge.data.tests
 
-import br.ufs.uolchallenge.data.NewsInfrastructure
+import br.ufs.uolchallenge.data.NewsFeedInfrastructure
 import br.ufs.uolchallenge.data.models.NewsFeedPayload
 import br.ufs.uolchallenge.data.rest.UOLWebService
 import br.ufs.uolchallenge.data.rest.WebServiceFactory
@@ -24,16 +24,16 @@ import java.util.concurrent.TimeUnit
  * Created by bira on 11/3/17.
  */
 
-class NewsInfrastructureTests {
+class NewsFeedInfrastructureTests {
 
-    lateinit var infrastructure: NewsInfrastructure
+    lateinit var infrastructure: NewsFeedInfrastructure
     lateinit var server: MockWebServer
 
     @Before fun `before each test`() {
         server = MockWebServer()
         val serverURL = server.url("/").toString()
         val webservice = WebServiceFactory.create(apiURL = serverURL)
-        infrastructure = NewsInfrastructure(webservice, Schedulers.trampoline())
+        infrastructure = NewsFeedInfrastructure(webservice, Schedulers.trampoline())
     }
 
     @After fun `after each test`() {
@@ -128,7 +128,7 @@ class NewsInfrastructureTests {
             on(it.latestNews()) doReturn noInternet
         }
 
-        infrastructure = NewsInfrastructure(mockedWebService, Schedulers.trampoline())
+        infrastructure = NewsFeedInfrastructure(mockedWebService, Schedulers.trampoline())
 
         infrastructure.latestNews()
                 .test()
@@ -144,7 +144,7 @@ class NewsInfrastructureTests {
             on(it.latestNews()) doReturn connectionDied
         }
 
-        infrastructure = NewsInfrastructure(mockedWebService, Schedulers.trampoline())
+        infrastructure = NewsFeedInfrastructure(mockedWebService, Schedulers.trampoline())
 
         infrastructure.latestNews()
                 .test()
