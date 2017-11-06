@@ -21,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Action
 
-class DisplayNewsActivity : AppCompatActivity(), NewsContentView {
+class NewsContentActivity : AppCompatActivity(), NewsContentView {
 
     private val shareURL by lazy { intent.extras.getString(SHARE_URL) }
     private val viewURL by lazy { intent.extras.getString(VISUALIZATION_URL) }

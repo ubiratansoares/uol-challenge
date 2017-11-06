@@ -4,7 +4,7 @@
     android:id="@+id/screenRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.ufs.uolchallenge.detail.DisplayNewsActivity">
+    tools:context="br.ufs.uolchallenge.detail.NewsContentActivity">
 
     <WebView
         android:id="@+id/webview"

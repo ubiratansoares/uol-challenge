@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".detail.DisplayNewsActivity"
+            android:name=".detail.NewsContentActivity"
             android:label="@string/title_activity_display_news"
             android:theme="@style/AppTheme" />
     </application>
