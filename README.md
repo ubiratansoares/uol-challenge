@@ -27,7 +27,7 @@ As a 100% online application, thi project implements several strategies to deal 
 cases incoming from the Web such and 404, 5xx, 4XY, networking headaches and so on. 
 These strategies are applied both for news feed (REST API) and news content (WebView), levaraging decoupled presentation behaviors and inversion of control to data sources
 
-You may check some [screenshots](https://github.com/ubiratansoares/uol-challenge/extras) from the resulting app at gallery
+You may check some [screenshots](https://github.com/ubiratansoares/uol-challenge/tree/master/extras) from the resulting app at gallery
 
 ## When (Development Tracking)
 
