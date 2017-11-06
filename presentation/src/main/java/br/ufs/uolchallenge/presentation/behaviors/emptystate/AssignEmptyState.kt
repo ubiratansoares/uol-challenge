@@ -8,24 +8,28 @@ import io.reactivex.functions.Action
  * Created by bira on 11/3/17.
  */
 
-class AssignEmptyState<T>(val view: EmptyStateView,
+class AssignEmptyState<T>(val view: Any,
                           val uiScheduler: Scheduler) : ObservableTransformer<T, T> {
 
     override fun apply(upstream: Observable<T>): ObservableSource<T> {
 
+        if (view is EmptyStateView) {
+            return upstream
+                    .subscribeOn(uiScheduler)
+                    .doOnSubscribe { _ -> subscribeAndFire(view.hideEmptyState()) }
+                    .doOnError(this::evalute)
+        }
+
         return upstream
-                .subscribeOn(uiScheduler)
-                .doOnSubscribe { _ -> subscribeAndFireAction(view.hideEmptyState()) }
-                .doOnError(this::evalute)
     }
 
     private fun evalute(error: Throwable) {
         if (error is DataAccessError.ContentNotFound) {
-            subscribeAndFireAction(view.showEmptyState())
+            subscribeAndFire((view as EmptyStateView).showEmptyState())
         }
     }
 
-    private fun subscribeAndFireAction(toPerform: Action) {
+    private fun subscribeAndFire(toPerform: Action) {
         Completable.fromAction(toPerform)
                 .subscribeOn(uiScheduler)
                 .subscribe()

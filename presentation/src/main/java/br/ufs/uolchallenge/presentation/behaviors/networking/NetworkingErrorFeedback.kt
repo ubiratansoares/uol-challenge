@@ -9,7 +9,7 @@ import io.reactivex.*
  */
 
 class NetworkingErrorFeedback<T>(
-        val passiveView: NetworkingErrorView,
+        val passiveView: Any,
         val uiScheduler: Scheduler) : ObservableTransformer<T, T> {
 
     override fun apply(upstream: Observable<T>): ObservableSource<T> {
@@ -18,7 +18,7 @@ class NetworkingErrorFeedback<T>(
 
     private fun handleIfNetworkingError(throwable: Throwable): Observable<T> {
 
-        if (throwable is CommunicationError) {
+        if (passiveView is NetworkingErrorView && throwable is CommunicationError) {
             Completable.fromAction(passiveView.reportNetworkingError())
                     .subscribeOn(uiScheduler)
                     .subscribe()

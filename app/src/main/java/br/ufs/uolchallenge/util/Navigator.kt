@@ -21,4 +21,13 @@ object Navigator {
         origin.startActivity(intent)
     }
 
+    fun shareURL(origin: Context, url: String, title : String) {
+        val share = Intent(android.content.Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_SUBJECT, title)
+            putExtra(Intent.EXTRA_TEXT, url)
+        }
+        origin.startActivity(Intent.createChooser(share, "Compartilhar!"))
+    }
+
 }

@@ -8,20 +8,24 @@ import io.reactivex.functions.Action
 /**
  * Created by bira on 11/3/17.
  */
-class AssignErrorState<T>(val view: ErrorStateView,
+class AssignErrorState<T>(val view: Any,
                           val uiScheduler: Scheduler) : ObservableTransformer<T, T> {
 
     override fun apply(upstream: Observable<T>): ObservableSource<T> {
 
+        if (view is ErrorStateView) {
+            return upstream
+                    .subscribeOn(uiScheduler)
+                    .doOnSubscribe { _ -> subscribeAndFireAction(view.hideErrorState()) }
+                    .doOnError(this::evalute)
+
+        }
         return upstream
-                .subscribeOn(uiScheduler)
-                .doOnSubscribe { _ -> subscribeAndFireAction(view.hideErrorState()) }
-                .doOnError(this::evalute)
     }
 
     private fun evalute(error: Throwable) {
         if (error is RemoteSystemDown || error is UndesiredResponse) {
-            subscribeAndFireAction(view.showErrorState())
+            subscribeAndFireAction((view as ErrorStateView).showErrorState())
         }
     }
 

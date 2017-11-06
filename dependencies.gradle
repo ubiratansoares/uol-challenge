@@ -33,7 +33,7 @@ ext {
     roboletricVersion = '3.4.2'
 
     forceResolution = [
-            kotlin: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            kotlin       : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
             kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
     ]
 
@@ -50,6 +50,7 @@ ext {
 
     dataDependencies = [
             kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            kotlinReflect        : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
             rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitRxJavaAdapter: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
@@ -61,12 +62,13 @@ ext {
             junit        : "junit:junit:${jUnitVersion}",
             assertj      : "org.assertj:assertj-core:${assertJVersion}",
             mockito      : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
-            mockWebServer: "com.squareup.okhttp3:mockwebserver:${okHttpVersion}"
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:${okHttpVersion}",
+            roboletric   : "org.robolectric:robolectric:${roboletricVersion}"
     ]
 
     presentationDependencies = [
             kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            kotlinReflect : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
             rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             archRuntime   : "android.arch.lifecycle:runtime:${archComponentsVersion}",
@@ -82,7 +84,7 @@ ext {
 
     mobileUIDependencies = [
             kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            kotlinReflect : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
             rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             appCompat     : "com.android.support:appcompat-v7:${supportLibraryVersion}",

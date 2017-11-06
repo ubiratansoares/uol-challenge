@@ -8,6 +8,7 @@ import br.ufs.uolchallenge.presentation.behaviors.refresh.RefreshToogle
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
+import io.reactivex.Scheduler
 
 /**
  * Created by bira on 11/3/17.
@@ -27,5 +28,25 @@ class BehaviorsCoordinator<T> internal constructor(
                 .compose(networkingFeedback)
                 .compose(loadingCoordination)
                 .compose(toogleRefresh)
+    }
+
+    companion object Factory {
+
+        fun <T> createWith(view: Any, uiScheduler: Scheduler): BehaviorsCoordinator<T> {
+
+            val emptyState = AssignEmptyState<T>(view, uiScheduler)
+            val errorState = AssignErrorState<T>(view, uiScheduler)
+            val loader = LoadingCoordination<T>(view, uiScheduler)
+            val networkingFeedback = NetworkingErrorFeedback<T>(view, uiScheduler)
+            val refresher = RefreshToogle<T>(view, uiScheduler)
+
+            return BehaviorsCoordinator(
+                    showEmptyState = emptyState,
+                    showErrorState = errorState,
+                    networkingFeedback = networkingFeedback,
+                    loadingCoordination = loader,
+                    toogleRefresh = refresher
+            )
+        }
     }
 }

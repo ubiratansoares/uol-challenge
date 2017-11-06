@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:padding="@dimen/eight_dp">
 
-        <br.ufs.uolchallenge.util.WideImageView
+        <br.ufs.uolchallenge.widget.WideImageView
             android:id="@+id/newsImage"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
