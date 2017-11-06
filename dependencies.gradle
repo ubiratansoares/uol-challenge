@@ -30,7 +30,7 @@ ext {
     jUnitVersion = '4.12'
     assertJVersion = '3.8.0'
     mockitoKotlinVersion = '1.5.0'
-    roboletricVersion = '3.4.2'
+    roboletricVersion = '3.5.1'
 
     forceResolution = [
             kotlin       : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
