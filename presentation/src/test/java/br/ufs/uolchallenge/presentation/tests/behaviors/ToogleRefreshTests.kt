@@ -1,8 +1,8 @@
 package br.ufs.uolchallenge.presentation.tests.behaviors
 
 import br.ufs.uolchallenge.domain.DataAccessError
-import br.ufs.uolchallenge.presentation.behaviors.refresh.RefreshToogle
-import br.ufs.uolchallenge.presentation.behaviors.refresh.RefreshableView
+import br.ufs.uolchallenge.presentation.behaviors.fab.FabToogle
+import br.ufs.uolchallenge.presentation.behaviors.fab.FabActionableView
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
@@ -20,7 +20,7 @@ import org.mockito.Mockito
 class ToogleRefreshTests {
 
     val uiScheduler = Schedulers.trampoline()
-    lateinit var refreshToogler: RefreshToogle<Any>
+    lateinit var fabToogler: FabToogle<Any>
     lateinit var enable: Action
     lateinit var disable: Action
 
@@ -28,22 +28,22 @@ class ToogleRefreshTests {
         enable = mock()
         disable = mock()
 
-        val view = object : RefreshableView {
-            override fun disableRefresh(): Action {
+        val view = object : FabActionableView {
+            override fun disableFab(): Action {
                 return disable
             }
-            override fun enableRefresh(): Action {
+            override fun enableFab(): Action {
                 return enable
             }
 
         }
 
-        refreshToogler = RefreshToogle(view, uiScheduler)
+        fabToogler = FabToogle(view, uiScheduler)
     }
 
     @Test fun `should coordinate loading when flow emmits`() {
         Observable.just("A", "B", "C")
-                .compose(refreshToogler)
+                .compose(fabToogler)
                 .subscribe()
 
         `check refresh coordinated`()
@@ -51,7 +51,7 @@ class ToogleRefreshTests {
 
     @Test fun `should coordinate loading when flow is empty`() {
         Observable.empty<Any>()
-                .compose(refreshToogler)
+                .compose(fabToogler)
                 .subscribe()
 
         `check refresh coordinated`()
@@ -59,7 +59,7 @@ class ToogleRefreshTests {
 
     @Test fun `should not offer refresh when flow signal error`() {
         Observable.error<Any>(DataAccessError.RemoteSystemDown())
-                .compose(refreshToogler)
+                .compose(fabToogler)
                 .subscribe({}, {}, {})
 
         verify(disable).run()

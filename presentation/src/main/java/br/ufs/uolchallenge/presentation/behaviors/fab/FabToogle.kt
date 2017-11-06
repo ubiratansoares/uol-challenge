@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.presentation.behaviors.refresh
+package br.ufs.uolchallenge.presentation.behaviors.fab
 
 import io.reactivex.*
 import io.reactivex.functions.Action
@@ -7,16 +7,16 @@ import io.reactivex.functions.Action
 /**
  * Created by bira on 11/5/17.
  */
-class RefreshToogle<T>(
+class FabToogle<T>(
         private val view: Any,
         private val targetScheduler: Scheduler) : ObservableTransformer<T, T> {
 
     override fun apply(upstream: Observable<T>): ObservableSource<T> {
 
-        if (view is RefreshableView) {
+        if (view is FabActionableView) {
             return upstream
-                    .doOnSubscribe { _ -> fireAction(view.disableRefresh()) }
-                    .doOnComplete { fireAction(view.enableRefresh()) }
+                    .doOnSubscribe { _ -> fireAction(view.disableFab()) }
+                    .doOnComplete { fireAction(view.enableFab()) }
         }
 
         return upstream

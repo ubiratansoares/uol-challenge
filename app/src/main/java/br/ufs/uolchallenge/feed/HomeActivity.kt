@@ -90,11 +90,11 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         return resetErrorContainer()
     }
 
-    override fun disableRefresh(): Action {
+    override fun disableFab(): Action {
         return Action { fab.visibility = View.GONE }
     }
 
-    override fun enableRefresh(): Action {
+    override fun enableFab(): Action {
         return Action { fab.visibility = View.VISIBLE }
     }
 

@@ -86,10 +86,10 @@ class NewsContentActivityTests {
     }
 
     @Test fun `should dispatch actions for refresh option`() {
-        activity.disableRefresh().run()
+        activity.disableFab().run()
         `refresh option should not be visible`()
 
-        activity.enableRefresh().run()
+        activity.enableFab().run()
         `refresh option should be visible`()
     }
 
