@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
+
     compileSdkVersion rootProject.ext.compileSDK
+
     defaultConfig {
         applicationId "br.ufs.uolchallenge"
         minSdkVersion rootProject.ext.minSDK
@@ -12,10 +14,23 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../extras/uol-keystore")
+            storePassword "123456"
+            keyAlias 'uolalias'
+            keyPassword "123456"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
         }
     }
 
@@ -27,7 +42,6 @@ android {
 }
 
 dependencies {
-
     implementation project(':data-infrastructure')
     implementation project(':domain')
     implementation project(':presentation')
@@ -46,7 +60,6 @@ dependencies {
     implementation mobileUIDependencies.archRuntime
     implementation mobileUIDependencies.archExtensions
     implementation mobileUIDependencies.picasso
-
     testImplementation mobileUITestDependencies.junit
     testImplementation mobileUITestDependencies.assertj
     testImplementation mobileUITestDependencies.roboletric
@@ -60,4 +73,3 @@ configurations.all {
         ]
     }
 }
-apply plugin: 'kotlin-android-extensions'
