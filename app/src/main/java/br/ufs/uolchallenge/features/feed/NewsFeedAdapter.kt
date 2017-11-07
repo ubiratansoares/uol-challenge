@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.feed
+package br.ufs.uolchallenge.features.feed
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

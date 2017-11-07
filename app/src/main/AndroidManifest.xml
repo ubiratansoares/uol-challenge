@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".feed.HomeActivity">
+        <activity android:name="br.ufs.uolchallenge.features.feed.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,7 +19,7 @@
         </activity>
 
         <activity
-            android:name=".detail.NewsContentActivity"
+            android:name="br.ufs.uolchallenge.features.detail.NewsContentActivity"
             android:label="@string/title_activity_display_news"
             android:theme="@style/AppTheme" />
     </application>

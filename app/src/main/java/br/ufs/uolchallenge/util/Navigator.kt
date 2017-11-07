@@ -2,9 +2,9 @@ package br.ufs.uolchallenge.util
 
 import android.content.Context
 import android.content.Intent
-import br.ufs.uolchallenge.detail.NewsContentActivity
-import br.ufs.uolchallenge.detail.NewsContentActivity.Companion.SHARE_URL
-import br.ufs.uolchallenge.detail.NewsContentActivity.Companion.VISUALIZATION_URL
+import br.ufs.uolchallenge.features.detail.NewsContentActivity
+import br.ufs.uolchallenge.features.detail.NewsContentActivity.Companion.SHARE_URL
+import br.ufs.uolchallenge.features.detail.NewsContentActivity.Companion.VISUALIZATION_URL
 
 /**
  * Created by bira on 11/5/17.

@@ -7,7 +7,7 @@
     android:background="@android:color/white"
     android:padding="@dimen/eight_dp"
     android:clipToPadding="true"
-    tools:context="br.ufs.uolchallenge.detail.NewsContentActivity">
+    tools:context=".features.detail.NewsContentActivity">
 
     <WebView
         android:id="@+id/webview"

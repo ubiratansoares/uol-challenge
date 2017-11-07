@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.detail
+package br.ufs.uolchallenge.features.detail
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton

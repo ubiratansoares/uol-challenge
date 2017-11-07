@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import br.ufs.uolchallenge.feed.HomeActivity
+import br.ufs.uolchallenge.features.feed.HomeActivity
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

@@ -7,7 +7,7 @@ import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import br.ufs.uolchallenge.detail.NewsContentActivity
+import br.ufs.uolchallenge.features.detail.NewsContentActivity
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test

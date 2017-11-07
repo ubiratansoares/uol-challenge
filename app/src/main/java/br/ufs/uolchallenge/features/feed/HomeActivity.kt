@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.feed
+package br.ufs.uolchallenge.features.feed
 
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
