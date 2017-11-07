@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.ufs.uolchallenge.R
+import br.ufs.uolchallenge.presentation.BehaviorsCoordinator
 import br.ufs.uolchallenge.presentation.feed.NewsFeedView
 import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModel
 import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModelFactory
@@ -33,12 +34,16 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     lateinit var composite: CompositeDisposable
     lateinit var viewModel: NewsFeedViewModel
 
-    val feedview by bindView<RecyclerView>(R.id.feedView)
+    val feedView by bindView<RecyclerView>(R.id.feedView)
     val loading by bindView<ProgressBar>(R.id.loading)
     val feedbackContainer by bindView<View>(R.id.feedbackContainer)
     val errorImage by bindView<ImageView>(R.id.errorImage)
     val errorMessage by bindView<TextView>(R.id.errorMessage)
     val fab by bindView<FloatingActionButton>(R.id.fab)
+
+    val coordinator: BehaviorsCoordinator<NewsFeedEntry> by lazy {
+        BehaviorsCoordinator.createWith<NewsFeedEntry>(this, AndroidSchedulers.mainThread())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,20 +53,26 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     override fun onResume() {
         super.onResume()
-        fetchNews(false)
+        fetchNews()
     }
 
     override fun onDestroy() {
-        releaseSubscriptions()
         super.onDestroy()
+        releaseSubscriptions()
     }
 
     override fun showLoading(): Action {
-        return Action { loading.visibility = View.VISIBLE }
+        return Action {
+            loading.visibility = View.VISIBLE
+            Log.d("Feed", "-> Show Loading")
+        }
     }
 
     override fun hideLoading(): Action {
-        return Action { loading.visibility = View.GONE }
+        return Action {
+            loading.visibility = View.GONE
+            Log.d("Feed", "-> Hide Loading")
+        }
     }
 
     override fun showEmptyState(): Action {
@@ -104,14 +115,15 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         errorMessage.text = getString(errorMessageResource)
     }
 
-    private fun fetchNews(forceUpdate: Boolean) {
+    private fun fetchNews(forceUpdate: Boolean = false) {
         val items: MutableList<NewsFeedEntry> = mutableListOf()
 
         val disposable = viewModel.fetchLastestNews(forceUpdate)
+                .compose(coordinator)
                 .observeOn(uiScheduler)
                 .subscribe(
                         { items.add(it) },
-                        { Log.d("Feed", "Error -> ${it.message}") },
+                        { Log.d("Feed", "Error -> ${it.javaClass.simpleName}") },
                         { showNewsFeed(items) }
                 )
 
@@ -121,10 +133,11 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
 
     fun showNewsFeed(items: List<NewsFeedEntry>) {
-        feedview.adapter = NewsFeedAdapter(items)
+        feedView.adapter = NewsFeedAdapter(items)
     }
 
     private fun setup() {
+        resetErrorContainer().run()
         retrieveViewModel()
         setupRecyclerView()
         fab.setOnClickListener { fetchForcingUpdate() }
@@ -139,11 +152,11 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
             else -> LinearLayoutManager.VERTICAL
         }
 
-        feedview.layoutManager = LinearLayoutManager(this, displayMode, false)
+        feedView.layoutManager = LinearLayoutManager(this, displayMode, false)
     }
 
     private fun retrieveViewModel() {
-        val factory = NewsFeedViewModelFactory(this)
+        val factory = NewsFeedViewModelFactory()
         viewModel = ViewModelProviders.of(this, factory).get(NewsFeedViewModel::class.java)
     }
 
@@ -157,19 +170,19 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
         releaseSubscriptions()
         fetchNews(true)
         resetErrorContainer()
-        feedview.adapter = null
+        feedView.adapter = null
     }
 
     private fun resetErrorContainer(): Action {
         return Action {
+            feedbackContainer.visibility = View.GONE
             errorMessage.text = ""
             errorImage.setImageResource(0)
-            feedbackContainer.visibility = View.GONE
         }
     }
 
     private fun releaseSubscriptions() {
-        composite.clear()
+        composite.dispose()
     }
 
 }

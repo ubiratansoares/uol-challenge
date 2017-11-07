@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/feedbackContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:visibility="gone">
+
+    <ImageView
+        android:id="@+id/errorImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        tools:src="@drawable/img_network_off" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#C2C2C2"
+        android:gravity="center"
+        tools:text="Houve um erro de conexão" />
+
+</LinearLayout>

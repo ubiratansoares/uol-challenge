@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/screenRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="@dimen/eight_dp"
-    android:clipToPadding="true"
-    tools:context="br.ufs.uolchallenge.detail.NewsContentActivity">
+    android:id="@+id/screenRoot"
+    tools:context="br.ufs.uolchallenge.feed.HomeActivity">
 
-    <WebView
-        android:id="@+id/webview"
-        android:visibility="invisible"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/feedView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/eight_dp"
+        tools:listitem="@layout/view_feed_entry_with_image" />
+
+    <include
+        layout="@layout/view_error_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center|top" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -23,18 +29,12 @@
         android:layout_gravity="center"
         android:visibility="gone" />
 
-    <include
-        layout="@layout/view_error_feedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/shareButton"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/eight_dp"
-        android:src="@drawable/ic_share_white_24dp" />
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_autorenew_white_24dp" />
 
 </FrameLayout>

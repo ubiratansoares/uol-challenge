@@ -13,6 +13,7 @@ import io.reactivex.Scheduler
 /**
  * Created by bira on 11/3/17.
  */
+
 class NewsFeedInfrastructure(private val webservice: UOLWebService,
                              private val ioBoundedScheduler: Scheduler) : FetchNewsFeed {
 

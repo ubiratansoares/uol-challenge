@@ -34,7 +34,7 @@ class NewsFeedActivityTests {
     @Before fun `before each test`() {
         activity = Robolectric.buildActivity(HomeActivity::class.java).create().get()
         loading = activity.loading
-        feedView = activity.feedview
+        feedView = activity.feedView
         feedbackContainer = activity.feedbackContainer
         errorImage = activity.errorImage
         errorLabel = activity.errorMessage
