@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.presentation
+package br.ufs.uolchallenge.presentation.behaviors
 
 import br.ufs.uolchallenge.presentation.behaviors.emptystate.AssignEmptyState
 import br.ufs.uolchallenge.presentation.behaviors.errorstate.AssignErrorState

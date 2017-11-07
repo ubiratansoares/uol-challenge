@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.presentation
+package br.ufs.uolchallenge.presentation.feed
 
 /**
  * Created by bira on 11/3/17.
@@ -12,9 +12,9 @@ class ImageScaler {
         val parts = uolImageURL.split("_")
         val base = parts[0]
         val values = parts[1]
-        val format = values.split("x", ".")
+        val format = values.split("x", "")
         val extension = format.last()
-        return "${base}_$DEFAULT_SIZE.$extension"
+        return "${base}_${DEFAULT_SIZE}.$extension"
     }
 
     companion object {

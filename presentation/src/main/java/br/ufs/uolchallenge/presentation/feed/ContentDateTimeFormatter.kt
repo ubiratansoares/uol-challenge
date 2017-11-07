@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.presentation
+package br.ufs.uolchallenge.presentation.feed
 
 import java.text.SimpleDateFormat
 import java.util.*

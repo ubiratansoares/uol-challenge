@@ -11,13 +11,10 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.ufs.uolchallenge.R
-import br.ufs.uolchallenge.data.NewsContentInfrastructure
-import br.ufs.uolchallenge.presentation.BehaviorsCoordinator
+import br.ufs.uolchallenge.factories.NewsContentFactory
 import br.ufs.uolchallenge.presentation.detail.NewsContentView
-import br.ufs.uolchallenge.presentation.detail.NewsDetailPresenter
 import br.ufs.uolchallenge.util.Navigator
 import br.ufs.uolchallenge.util.bindView
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Action
 
@@ -34,16 +31,13 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
     val errorMessage by bindView<TextView>(R.id.errorMessage)
     val fab by bindView<FloatingActionButton>(R.id.shareButton)
 
-    val uiScheduler by lazy { AndroidSchedulers.mainThread() }
-    val coordinator by lazy { BehaviorsCoordinator(this, uiScheduler) }
+    val presenter by lazy { NewsContentFactory(this) }
 
-    lateinit var subscription : Disposable
-    lateinit var presenter: NewsDetailPresenter
+    lateinit var subscription: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display_news)
-        inject()
         setupViews()
     }
 
@@ -122,12 +116,6 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
             errorImage.setImageResource(0)
             feedbackContainer.visibility = View.GONE
         }
-    }
-
-    private fun inject() {
-        val usecase = NewsContentInfrastructure()
-        webView.webViewClient = usecase
-        presenter = NewsDetailPresenter(usecase, coordinator)
     }
 
     private fun setupViews() {

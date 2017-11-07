@@ -1,6 +1,5 @@
 package br.ufs.uolchallenge.feed
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
@@ -16,13 +15,14 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.ufs.uolchallenge.R
-import br.ufs.uolchallenge.presentation.BehaviorsCoordinator
+import br.ufs.uolchallenge.factories.BehaviorsFactory
+import br.ufs.uolchallenge.factories.BehaviorsFactory.uiScheduler
+import br.ufs.uolchallenge.factories.NewsFeedFactory
 import br.ufs.uolchallenge.presentation.feed.NewsFeedView
 import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModel
-import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModelFactory
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import br.ufs.uolchallenge.util.bindView
-import io.reactivex.android.schedulers.AndroidSchedulers
+import br.ufs.uolchallenge.util.withFactory
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 
@@ -37,10 +37,8 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     val fab by bindView<FloatingActionButton>(R.id.fab)
 
     val composite by lazy { CompositeDisposable() }
-    val uiScheduler by lazy { AndroidSchedulers.mainThread() }
-    val coordinator by lazy { BehaviorsCoordinator(this, uiScheduler) }
-
-    lateinit var viewModel: NewsFeedViewModel
+    val coordinator by lazy { BehaviorsFactory(this) }
+    val viewModel by withFactory<NewsFeedViewModel> { NewsFeedFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,7 +126,6 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     private fun setup() {
         resetErrorContainer().run()
-        retrieveViewModel()
         setupRecyclerView()
         fab.setOnClickListener { fetchForcingUpdate() }
     }
@@ -144,11 +141,6 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
         val layoutManager = LinearLayoutManager(this, displayMode, false)
         feedView.layoutManager = layoutManager
-    }
-
-    private fun retrieveViewModel() {
-        val factory = NewsFeedViewModelFactory()
-        viewModel = ViewModelProviders.of(this, factory).get(NewsFeedViewModel::class.java)
     }
 
     private fun showCallToAction(callToActionText: Int) {

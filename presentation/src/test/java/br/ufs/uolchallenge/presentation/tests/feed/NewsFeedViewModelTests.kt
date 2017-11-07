@@ -2,7 +2,7 @@ package br.ufs.uolchallenge.presentation.tests.feed
 
 import br.ufs.uolchallenge.domain.FetchNewsFeed
 import br.ufs.uolchallenge.domain.News
-import br.ufs.uolchallenge.presentation.RowModelMapper
+import br.ufs.uolchallenge.presentation.feed.RowModelMapper
 import br.ufs.uolchallenge.presentation.feed.NewsFeedViewModel
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever

@@ -1,6 +1,6 @@
 package br.ufs.uolchallenge.presentation.tests.feed
 
-import br.ufs.uolchallenge.presentation.ContentDateTimeFormatter
+import br.ufs.uolchallenge.presentation.feed.ContentDateTimeFormatter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.util.*

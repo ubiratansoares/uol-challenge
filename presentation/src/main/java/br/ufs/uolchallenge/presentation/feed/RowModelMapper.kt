@@ -1,4 +1,4 @@
-package br.ufs.uolchallenge.presentation
+package br.ufs.uolchallenge.presentation.feed
 
 import br.ufs.uolchallenge.domain.News
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry

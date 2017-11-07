@@ -2,7 +2,6 @@ package br.ufs.uolchallenge.presentation.feed
 
 import android.arch.lifecycle.ViewModel
 import br.ufs.uolchallenge.domain.FetchNewsFeed
-import br.ufs.uolchallenge.presentation.RowModelMapper
 import br.ufs.uolchallenge.presentation.models.NewsFeedEntry
 import io.reactivex.Observable
 import io.reactivex.internal.operators.observable.ObservableNever
@@ -11,7 +10,7 @@ import io.reactivex.internal.operators.observable.ObservableNever
  * Created by bira on 11/3/17.
  */
 
-class NewsFeedViewModel internal constructor(val usecase: FetchNewsFeed) : ViewModel() {
+class NewsFeedViewModel constructor(val usecase: FetchNewsFeed) : ViewModel() {
 
     private val mapper = RowModelMapper()
     private var replayer: Observable<NewsFeedEntry> = Observable.never()

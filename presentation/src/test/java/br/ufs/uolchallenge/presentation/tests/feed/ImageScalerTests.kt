@@ -1,6 +1,6 @@
 package br.ufs.uolchallenge.presentation.tests.feed
 
-import br.ufs.uolchallenge.presentation.ImageScaler
+import br.ufs.uolchallenge.presentation.feed.ImageScaler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test

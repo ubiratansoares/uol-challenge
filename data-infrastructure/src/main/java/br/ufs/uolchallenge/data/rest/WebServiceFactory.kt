@@ -34,6 +34,7 @@ object WebServiceFactory {
         return retrofit.create(UOLWebService::class.java)
     }
 
+
     private fun createLogger(debuggable: Boolean): Interceptor {
         val loggingLevel = if (debuggable) {
             HttpLoggingInterceptor.Level.BASIC
