@@ -35,7 +35,7 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
     val fab by bindView<FloatingActionButton>(R.id.shareButton)
 
     val uiScheduler by lazy { AndroidSchedulers.mainThread() }
-    val coordinator: BehaviorsCoordinator by lazy { BehaviorsCoordinator(this, uiScheduler) }
+    val coordinator by lazy { BehaviorsCoordinator(this, uiScheduler) }
 
     lateinit var subscription : Disposable
     lateinit var presenter: NewsDetailPresenter

@@ -19,7 +19,8 @@ class BehaviorsCoordinator internal constructor(
         val showErrorState: AssignErrorState,
         val networkingFeedback: NetworkingErrorFeedback,
         val loadingCoordination: LoadingCoordination,
-        val toogleFab: FabToogle) : ObservableTransformer<Any, Any> {
+        val toogleFab: FabToogle
+) : ObservableTransformer<Any, Any> {
 
     override fun apply(upstream: Observable<Any>): ObservableSource<Any> {
         return upstream

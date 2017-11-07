@@ -38,10 +38,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     val composite by lazy { CompositeDisposable() }
     val uiScheduler by lazy { AndroidSchedulers.mainThread() }
-
-    val coordinator: BehaviorsCoordinator by lazy {
-        BehaviorsCoordinator(this, uiScheduler)
-    }
+    val coordinator by lazy { BehaviorsCoordinator(this, uiScheduler) }
 
     lateinit var viewModel: NewsFeedViewModel
 
@@ -162,9 +159,9 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
 
     private fun fetchForcingUpdate() {
         releaseSubscriptions()
-        fetchNews(true)
         resetErrorContainer()
         feedView.adapter = null
+        fetchNews(true)
     }
 
     private fun resetErrorContainer(): Action {
@@ -176,7 +173,7 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     }
 
     private fun releaseSubscriptions() {
-        composite.dispose()
+        composite.clear()
     }
 
 }

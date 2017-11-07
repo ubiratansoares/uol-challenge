@@ -11,7 +11,7 @@ import io.reactivex.internal.operators.observable.ObservableNever
  * Created by bira on 11/3/17.
  */
 
-open class NewsFeedViewModel internal constructor(val usecase: FetchNewsFeed) : ViewModel() {
+class NewsFeedViewModel internal constructor(val usecase: FetchNewsFeed) : ViewModel() {
 
     private val mapper = RowModelMapper()
     private var replayer: Observable<NewsFeedEntry> = Observable.never()
