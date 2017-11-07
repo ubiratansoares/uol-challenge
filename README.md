@@ -25,13 +25,18 @@ feature and news content screen.
 
 As a 100% online application, this demo project implements several strategies to deal with most common error 
 cases incoming from the Web such and 404, 5xx, 4XY, networking headaches and so on. 
-These strategies are applied both for news feed (REST API) and news content (WebView), leveraging decoupled presentation behaviors and inversion of control (to data sources)
+These strategies are applied both for news feed (REST API) and news content (WebView), 
+leveraging decoupled presentation behaviors and inversion of control (to data sources)
 
-You may check some [screenshots](https://github.com/ubiratansoares/uol-challenge/tree/master/extras) from the resulting app at gallery
+Note that you must build against the `live` build variant in order to let the app perform real calls to the REST API 
+
+You may check some [screenshots](https://github.com/ubiratansoares/uol-challenge/tree/master/extras) 
+from the resulting app at gallery
 
 ## When (Development Tracking)
 
-Histories and tasks for every single feature of this project were tracked at this [Trello Board](https://trello.com/b/ghpAQrPc/uol-challenge)
+Histories and tasks for every single feature of this project were tracked 
+at this [Trello Board](https://trello.com/b/ghpAQrPc/uol-challenge)
 
 
 ## License
