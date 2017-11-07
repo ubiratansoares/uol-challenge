@@ -10,9 +10,10 @@ import io.reactivex.Observable
 
 class NewsDetailPresenter(
         private val usecase: FetchContentForNews,
-        private val coordinator: BehaviorsCoordinator<Any>) {
+        private val coordinator: BehaviorsCoordinator) {
 
     fun loadNews(): Observable<Any> {
         return usecase.execute().compose(coordinator)
     }
+
 }

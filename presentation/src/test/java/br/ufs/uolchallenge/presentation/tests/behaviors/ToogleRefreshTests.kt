@@ -1,8 +1,8 @@
 package br.ufs.uolchallenge.presentation.tests.behaviors
 
 import br.ufs.uolchallenge.domain.DataAccessError
-import br.ufs.uolchallenge.presentation.behaviors.fab.FabToogle
 import br.ufs.uolchallenge.presentation.behaviors.fab.FabActionableView
+import br.ufs.uolchallenge.presentation.behaviors.fab.FabToogle
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
@@ -20,7 +20,7 @@ import org.mockito.Mockito
 class ToogleRefreshTests {
 
     val uiScheduler = Schedulers.trampoline()
-    lateinit var fabToogler: FabToogle<Any>
+    lateinit var fabToogler: FabToogle
     lateinit var enable: Action
     lateinit var disable: Action
 

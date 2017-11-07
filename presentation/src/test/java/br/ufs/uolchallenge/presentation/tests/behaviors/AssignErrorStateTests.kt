@@ -19,7 +19,7 @@ import org.junit.Test
 class AssignErrorStateTests {
 
     val uiScheduler = Schedulers.trampoline()
-    lateinit var errorStateAssigner: AssignErrorState<Any>
+    lateinit var errorStateAssigner: AssignErrorState
 
     lateinit var showAction: Action
     lateinit var hideAction: Action

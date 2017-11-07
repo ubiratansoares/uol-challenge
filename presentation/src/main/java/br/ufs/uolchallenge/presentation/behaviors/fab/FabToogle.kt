@@ -7,11 +7,11 @@ import io.reactivex.functions.Action
 /**
  * Created by bira on 11/5/17.
  */
-class FabToogle<T>(
+class FabToogle(
         private val view: Any,
-        private val targetScheduler: Scheduler) : ObservableTransformer<T, T> {
+        private val targetScheduler: Scheduler) : ObservableTransformer<Any, Any> {
 
-    override fun apply(upstream: Observable<T>): ObservableSource<T> {
+    override fun apply(upstream: Observable<Any>): ObservableSource<Any> {
 
         if (view is FabActionableView) {
             return upstream

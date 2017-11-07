@@ -20,7 +20,7 @@ import org.junit.Test
 class AssignEmptyStateTests {
 
     val uiScheduler = Schedulers.trampoline()
-    lateinit var emptyStateAssigner: AssignEmptyState<Any>
+    lateinit var emptyStateAssigner: AssignEmptyState
 
     lateinit var showAction: Action
     lateinit var hideAction: Action

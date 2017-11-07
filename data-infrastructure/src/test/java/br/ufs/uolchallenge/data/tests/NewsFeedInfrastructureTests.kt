@@ -104,7 +104,7 @@ class NewsFeedInfrastructureTests {
 
     @Test fun `should integrate successfully with networking, handling timeout`() {
 
-        val timeToExceed = WebServiceFactory.DEFAULT_TIMEOUT_SECONDS + 5
+        val timeToExceed = WebServiceFactory.DEFAULT_TIMEOUT_SECONDS + 1
         val json = FileReader.readFile("response_broken_200OK.json")
 
         val mockResponse = MockResponse()

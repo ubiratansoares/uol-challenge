@@ -8,10 +8,10 @@ import io.reactivex.functions.Action
  * Created by bira on 11/3/17.
  */
 
-class LoadingCoordination<T>(val view: Any,
-                             val uiScheduler: Scheduler) : ObservableTransformer<T, T> {
+class LoadingCoordination(val view: Any,
+                          val uiScheduler: Scheduler) : ObservableTransformer<Any, Any> {
 
-    override fun apply(upstream: Observable<T>): ObservableSource<T> {
+    override fun apply(upstream: Observable<Any>): ObservableSource<Any> {
 
         if (view is LoadingContentView) {
             return upstream

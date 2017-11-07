@@ -28,12 +28,7 @@ import io.reactivex.functions.Action
 
 class HomeActivity : AppCompatActivity(), NewsFeedView {
 
-    private val uiScheduler = AndroidSchedulers.mainThread()
-    private val screenRoot by bindView<View>(R.id.screenRoot)
-
-    lateinit var composite: CompositeDisposable
-    lateinit var viewModel: NewsFeedViewModel
-
+    val screenRoot by bindView<View>(R.id.screenRoot)
     val feedView by bindView<RecyclerView>(R.id.feedView)
     val loading by bindView<ProgressBar>(R.id.loading)
     val feedbackContainer by bindView<View>(R.id.feedbackContainer)
@@ -41,9 +36,14 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     val errorMessage by bindView<TextView>(R.id.errorMessage)
     val fab by bindView<FloatingActionButton>(R.id.fab)
 
-    val coordinator: BehaviorsCoordinator<NewsFeedEntry> by lazy {
-        BehaviorsCoordinator.createWith<NewsFeedEntry>(this, AndroidSchedulers.mainThread())
+    val composite by lazy { CompositeDisposable() }
+    val uiScheduler by lazy { AndroidSchedulers.mainThread() }
+
+    val coordinator: BehaviorsCoordinator by lazy {
+        BehaviorsCoordinator(this, uiScheduler)
     }
+
+    lateinit var viewModel: NewsFeedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,17 +62,11 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     }
 
     override fun showLoading(): Action {
-        return Action {
-            loading.visibility = View.VISIBLE
-            Log.d("Feed", "-> Show Loading")
-        }
+        return Action { loading.visibility = View.VISIBLE }
     }
 
     override fun hideLoading(): Action {
-        return Action {
-            loading.visibility = View.GONE
-            Log.d("Feed", "-> Hide Loading")
-        }
+        return Action { loading.visibility = View.GONE }
     }
 
     override fun showEmptyState(): Action {
@@ -116,21 +110,20 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
     }
 
     private fun fetchNews(forceUpdate: Boolean = false) {
+
         val items: MutableList<NewsFeedEntry> = mutableListOf()
 
         val disposable = viewModel.fetchLastestNews(forceUpdate)
                 .compose(coordinator)
                 .observeOn(uiScheduler)
                 .subscribe(
-                        { items.add(it) },
+                        { items.add(it as NewsFeedEntry) },
                         { Log.d("Feed", "Error -> ${it.javaClass.simpleName}") },
                         { showNewsFeed(items) }
                 )
 
-        composite = CompositeDisposable()
         composite.add(disposable)
     }
-
 
     fun showNewsFeed(items: List<NewsFeedEntry>) {
         feedView.adapter = NewsFeedAdapter(items)
@@ -152,7 +145,8 @@ class HomeActivity : AppCompatActivity(), NewsFeedView {
             else -> LinearLayoutManager.VERTICAL
         }
 
-        feedView.layoutManager = LinearLayoutManager(this, displayMode, false)
+        val layoutManager = LinearLayoutManager(this, displayMode, false)
+        feedView.layoutManager = layoutManager
     }
 
     private fun retrieveViewModel() {

@@ -23,7 +23,7 @@ class NetworkingErrorFeedbackTests {
 
     val uiScheduler = Schedulers.trampoline()
 
-    lateinit var networkingFeedback: NetworkingErrorFeedback<Any>
+    lateinit var networkingFeedback: NetworkingErrorFeedback
     lateinit var report: Action
 
     @Before fun `before each test`() {

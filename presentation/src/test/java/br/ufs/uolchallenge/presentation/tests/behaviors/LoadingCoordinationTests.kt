@@ -21,7 +21,7 @@ import org.mockito.Mockito
 class LoadingCoordinationTests {
 
     val uiScheduler = Schedulers.trampoline()
-    lateinit var loadingCoordination: LoadingCoordination<Any>
+    lateinit var loadingCoordination: LoadingCoordination
     lateinit var showAction: Action
     lateinit var hideAction: Action
 

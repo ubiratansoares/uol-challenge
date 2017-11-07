@@ -34,8 +34,11 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
     val errorMessage by bindView<TextView>(R.id.errorMessage)
     val fab by bindView<FloatingActionButton>(R.id.shareButton)
 
+    val uiScheduler by lazy { AndroidSchedulers.mainThread() }
+    val coordinator: BehaviorsCoordinator by lazy { BehaviorsCoordinator(this, uiScheduler) }
+
+    lateinit var subscription : Disposable
     lateinit var presenter: NewsDetailPresenter
-    lateinit var subscription: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,8 +125,6 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
     }
 
     private fun inject() {
-        val uiScheduler = AndroidSchedulers.mainThread()
-        val coordinator = BehaviorsCoordinator.createWith<Any>(this, uiScheduler)
         val usecase = NewsContentInfrastructure()
         webView.webViewClient = usecase
         presenter = NewsDetailPresenter(usecase, coordinator)
