@@ -33,7 +33,7 @@ class NewsFeedViewModel internal constructor(val usecase: FetchNewsFeed) : ViewM
         replayer = Observable.never()
     }
 
-    private companion object {
+    companion object {
         val CLEAR_STATE: Observable<*> = ObservableNever.INSTANCE
         val MAX_SUBSCRIBERS = 1
         val BUFFER_COUNT = 100
