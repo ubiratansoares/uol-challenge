@@ -2,7 +2,7 @@
 
 # UOL Challenge
  
-> This is a practical project for a Software Engineer position at UOL.
+> This is a practical project for a Software Engineer position.
 > Please check details below.
 
 ## Why
@@ -11,21 +11,21 @@ Because this position should be mine ... 😹😹😹
 
 ## How
 
-This project leverages on several modern approaches to build Android applications, for instance
+This project leverages on several modern approaches to build Android applications :
 
 - 100% written in Kotlin programming language
 - Massive test coverage, including tests at unit and integration levels, using both JVM-local and instrumentation environments 
 - Continuous integration (and ready-to-go Continuous Delivery)
-- Modularization-ready code splitting
+- Modularization-ready
 - MVVM Architecture powered by Android Architecture Components
 - Rock-solid reactive data flows leveraging RxJava2
 
 This project is focused on `correctness` of the content experience, both for news feed 
 feature and news content screen. 
 
-As a 100% online application, thi project implements several strategies to deal with most common error 
+As a 100% online application, this demo project implements several strategies to deal with most common error 
 cases incoming from the Web such and 404, 5xx, 4XY, networking headaches and so on. 
-These strategies are applied both for news feed (REST API) and news content (WebView), levaraging decoupled presentation behaviors and inversion of control to data sources
+These strategies are applied both for news feed (REST API) and news content (WebView), leveraging decoupled presentation behaviors and inversion of control (to data sources)
 
 You may check some [screenshots](https://github.com/ubiratansoares/uol-challenge/tree/master/extras) from the resulting app at gallery
 
