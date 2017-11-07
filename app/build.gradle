@@ -34,6 +34,16 @@ android {
         }
     }
 
+    flavorDimensions "envs"
+
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+            multiDexEnabled = true
+        }
+        live
+    }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -51,6 +61,7 @@ dependencies {
 
     implementation mobileUIDependencies.kotlin
     implementation mobileUIDependencies.kotlinReflect
+    implementation mobileUIDependencies.gson
     implementation mobileUIDependencies.rxJava
     implementation mobileUIDependencies.rxAndroid
     implementation mobileUIDependencies.appCompat

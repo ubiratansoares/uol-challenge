@@ -17,6 +17,7 @@ ext {
     kotlinVersion = '1.1.51'
 
     //Libraries
+    gsonVersion = "2.7"
     okHttpVersion = '3.8.0'
     retrofitVersion = '2.3.0'
     rxJavaVersion = '2.1.1'
@@ -94,8 +95,8 @@ ext {
             archRuntime   : "android.arch.lifecycle:runtime:${archComponentsVersion}",
             archExtensions: "android.arch.lifecycle:extensions:${archExtensionsVersion}",
             archCompiler  : "android.arch.lifecycle:compiler:${archExtensionsVersion}",
-            picasso       : "com.squareup.picasso:picasso:${picassoVersion}"
-
+            picasso       : "com.squareup.picasso:picasso:${picassoVersion}",
+            gson          : "com.google.code.gson:gson:${gsonVersion}"
     ]
 
     mobileUITestDependencies = [
