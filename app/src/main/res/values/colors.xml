@@ -7,6 +7,7 @@
 
     <color name="darkBlue">#ff0067b9</color>
     <color name="blue">#ff117ed1</color>
+    <color name="blue_card_ripple">#33117ed1</color>
     <color name="orange">#ffde7711</color>
 
 </resources>
