@@ -1,53 +1,55 @@
 package br.ufs.uolchallenge
 
-import com.schibsted.spain.barista.BaristaAssertions
+import com.schibsted.spain.barista.BaristaAssertions.*
 
 /**
  * Created by bira on 11/7/17.
  */
 
-object BehaviorsVerifier {
+fun afterExecution(func: BehaviorsVerifier.() -> Unit) = BehaviorsVerifier().apply { func() }
 
-    fun fabButtonShouldBeAvailable(): BehaviorsVerifier {
-        BaristaAssertions.assertDisplayed(R.id.fab)
+class BehaviorsVerifier {
+
+    fun fabButtonAvailable(): BehaviorsVerifier {
+        assertDisplayed(R.id.fab)
         return this
     }
 
-    fun fabShouldNotBeAvailable(): BehaviorsVerifier {
-        BaristaAssertions.assertNotDisplayed(R.id.fab)
+    fun fabButtionHidden(): BehaviorsVerifier {
+        assertNotDisplayed(R.id.fab)
         return this
     }
 
-    fun loadingIndicatorShouldBeInvisible(): BehaviorsVerifier {
-        BaristaAssertions.assertNotDisplayed(R.id.loading)
+    fun loadingIndicatorInvisible(): BehaviorsVerifier {
+        assertNotDisplayed(R.id.loading)
         return this
     }
 
     fun serverErrorReported(): BehaviorsVerifier {
-        BaristaAssertions.assertDrawable(R.id.errorImage, R.drawable.img_server_off)
-        BaristaAssertions.assertDisplayed(R.string.error_server_down)
+        assertDrawable(R.id.errorImage, R.drawable.img_server_off)
+        assertDisplayed(R.string.error_server_down)
         return this
     }
 
-    fun intenetIssueReported(): BehaviorsVerifier {
-        BaristaAssertions.assertDisplayed(R.id.snackbar_text)
-        BaristaAssertions.assertDisplayed(R.string.error_internet_connection)
+    fun internetIssueReported(): BehaviorsVerifier {
+        assertDisplayed(R.id.snackbar_text)
+        assertDisplayed(R.string.error_internet_connection)
         return this
     }
 
     fun noErrors(): BehaviorsVerifier {
-        BaristaAssertions.assertNotDisplayed(R.id.feedbackContainer)
+        assertNotDisplayed(R.id.feedbackContainer)
         return this
     }
 
     fun emptyStateReported(): BehaviorsVerifier {
-        BaristaAssertions.assertDrawable(R.id.errorImage, R.drawable.img_uol_logo_bw)
-        BaristaAssertions.assertDisplayed(R.string.error_not_found)
+        assertDrawable(R.id.errorImage, R.drawable.img_uol_logo_bw)
+        assertDisplayed(R.string.error_not_found)
         return this
     }
 
     fun undesiredResponseReported() {
-        BaristaAssertions.assertDrawable(R.id.errorImage, R.drawable.img_server_off)
-        BaristaAssertions.assertDisplayed(R.string.error_server_down)
+        assertDrawable(R.id.errorImage, R.drawable.img_server_off)
+        assertDisplayed(R.string.error_server_down)
     }
 }

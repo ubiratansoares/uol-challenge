@@ -19,62 +19,75 @@ class NewsFeedAcceptanceTests {
 
     @Rule @JvmField val launcher = ScriptableWebServerRule(HomeActivity::class.java)
 
-    private val robot = BehaviorsVerifier
-
     @Test fun serverDownScenario() {
         launcher.startWithCenario(WebResponseScenario.InternalServerError)
 
-        robot.fabShouldNotBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .serverErrorReported()
+        afterExecution {
+            fabButtionHidden()
+            loadingIndicatorInvisible()
+            serverErrorReported()
+        }
     }
 
     @Test fun notFoundScenario() {
         launcher.startWithCenario(WebResponseScenario.NotFound)
 
-        robot.fabShouldNotBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .emptyStateReported()
+        afterExecution {
+            fabButtionHidden()
+            loadingIndicatorInvisible()
+            emptyStateReported()
+        }
     }
 
     @Test fun otherRestErrorScenario() {
         launcher.startWithCenario(WebResponseScenario.ClientError)
 
-        robot.fabShouldNotBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .undesiredResponseReported()
+        afterExecution {
+            fabButtionHidden()
+            loadingIndicatorInvisible()
+            undesiredResponseReported()
+        }
+
     }
 
     @Test fun requestTimeoutScenario() {
         launcher.startWithCenario(WebResponseScenario.ConnectionTimeout)
 
-        robot.fabShouldNotBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .intenetIssueReported()
+        afterExecution {
+            fabButtionHidden()
+            loadingIndicatorInvisible()
+            internetIssueReported()
+        }
     }
 
     @Test fun connectionIssueScenario() {
         launcher.startWithCenario(WebResponseScenario.ConnectionError)
 
-        robot.fabShouldNotBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .intenetIssueReported()
+        afterExecution {
+            fabButtionHidden()
+            loadingIndicatorInvisible()
+            internetIssueReported()
+        }
     }
 
     @Test fun internetUnavailableScenario() {
         launcher.startWithCenario(WebResponseScenario.NoInternet)
 
-        robot.fabShouldNotBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .intenetIssueReported()
+        afterExecution {
+            fabButtionHidden()
+            loadingIndicatorInvisible()
+            internetIssueReported()
+        }
     }
 
     @Test fun resultsAvailable() {
         launcher.startWithCenario(WebResponseScenario.Success)
 
-        robot.fabButtonShouldBeAvailable()
-                .loadingIndicatorShouldBeInvisible()
-                .noErrors()
+        afterExecution {
+            fabButtonAvailable()
+            loadingIndicatorInvisible()
+            noErrors()
+        }
 
         assertRecyclerViewItemCount(R.id.feedView, 18) // From fakes
 
