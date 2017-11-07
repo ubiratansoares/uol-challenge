@@ -32,6 +32,7 @@ class BehaviorsVerifier {
     }
 
     fun internetIssueReported(): BehaviorsVerifier {
+        assertDrawable(R.id.errorImage, R.drawable.img_network_off)
         assertDisplayed(R.id.snackbar_text)
         assertDisplayed(R.string.error_internet_connection)
         return this
