@@ -32,10 +32,16 @@ ext {
     assertJVersion = '3.8.0'
     mockitoKotlinVersion = '1.5.0'
     roboletricVersion = '3.5.1'
+    espressoCoreVersion = '3.0.1'
+    espressoToolsVersion = '1.0.1'
+    baristaVersion = '1.7.0'
 
     forceResolution = [
-            kotlin       : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
-            kotlinReflect: "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+            kotlinReflect : "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}",
+            espressoCore  : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            espressoRunner: "com.android.support.test:runner:${espressoToolsVersion}",
+            espressoRules : "com.android.support.test:rules:${espressoToolsVersion}",
     ]
 
     domainDependencies = [
@@ -100,10 +106,14 @@ ext {
     ]
 
     mobileUITestDependencies = [
-            kotlin    : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
-            junit     : "junit:junit:${jUnitVersion}",
-            assertj   : "org.assertj:assertj-core:${assertJVersion}",
-            roboletric: "org.robolectric:robolectric:${roboletricVersion}"
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlinVersion}",
+            junit         : "junit:junit:${jUnitVersion}",
+            assertj       : "org.assertj:assertj-core:${assertJVersion}",
+            roboletric    : "org.robolectric:robolectric:${roboletricVersion}",
+            espressoRunner: "com.android.support.test:runner:${espressoToolsVersion}",
+            espressoRules : "com.android.support.test:rules:${espressoToolsVersion}",
+            espressoCore  : "com.android.support.test.espresso:espresso-core:${espressoCoreVersion}",
+            barista       : "com.schibsted.spain:barista:${baristaVersion}"
     ]
 
 }

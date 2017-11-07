@@ -9,6 +9,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -35,6 +36,10 @@ object FakeResponses {
         return Observable.error(exp)
     }
 
+    fun noInternet(): Observable<NewsFeedPayload> {
+        return Observable.error(UnknownHostException())
+    }
+
     fun connectionIssue(): Observable<NewsFeedPayload> {
         return Observable.error(IOException("Canceled"))
     }
@@ -42,7 +47,6 @@ object FakeResponses {
     fun requestTimeout(): Observable<NewsFeedPayload> {
         return Observable.error(SocketTimeoutException("Read timeout"))
     }
-
 
     fun clientError(): Observable<NewsFeedPayload> {
         val response = Response.error<NewsFeedPayload>(400, bodyFor(badRequest()))
@@ -204,7 +208,8 @@ object FakeResponses {
                 "      \"share-url\": \"https://esporte.uol.com.br/futebol/ultimas-noticias/lancepress/2017/11/01/militao-sofre-estiramento-na-coxa-esquerda-e-desfalca-o-sao-paulo.htm\",\n" +
                 "      \"webview-url\": \"https://esporte.uol.com.br/futebol/ultimas-noticias/lancepress/2017/11/01/militao-sofre-estiramento-na-coxa-esquerda-e-desfalca-o-sao-paulo.htm?app=uol-placar-futebol&plataforma=iphone&template=v2\"\n" +
                 "    }\n" +
-                "]"
+                "   ]" +
+                "}"
 
         return deserializer.fromJson(json, NewsFeedPayload::class.java)
     }

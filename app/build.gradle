@@ -71,9 +71,17 @@ dependencies {
     implementation mobileUIDependencies.archRuntime
     implementation mobileUIDependencies.archExtensions
     implementation mobileUIDependencies.picasso
+
     testImplementation mobileUITestDependencies.junit
     testImplementation mobileUITestDependencies.assertj
     testImplementation mobileUITestDependencies.roboletric
+
+    androidTestImplementation mobileUITestDependencies.espressoCore
+    androidTestImplementation mobileUITestDependencies.espressoRules
+    androidTestImplementation mobileUITestDependencies.espressoRunner
+    androidTestImplementation (mobileUITestDependencies.barista) {
+        exclude group: 'com.android.support'
+    }
 }
 
 
@@ -81,7 +89,10 @@ configurations.all {
     resolutionStrategy {
         forcedModules = [
                 rootProject.ext.forceResolution.kotlin,
-                rootProject.ext.forceResolution.kotlinReflect
+                rootProject.ext.forceResolution.kotlinReflect,
+                rootProject.ext.forceResolution.espressoCore,
+                rootProject.ext.forceResolution.espressoRunner,
+                rootProject.ext.forceResolution.espressoRules
         ]
     }
 }

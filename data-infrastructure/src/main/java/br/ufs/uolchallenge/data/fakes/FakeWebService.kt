@@ -1,6 +1,6 @@
 package br.ufs.uolchallenge.data.fakes
 
-import br.ufs.uolchallenge.data.fakes.NextState.*
+import br.ufs.uolchallenge.data.fakes.WebResponseScenario.*
 import br.ufs.uolchallenge.data.models.NewsFeedPayload
 import br.ufs.uolchallenge.data.rest.UOLWebService
 import io.reactivex.Observable
@@ -11,14 +11,19 @@ import io.reactivex.Observable
 
 object FakeWebService : UOLWebService {
 
-    private var next: NextState = Success
+    private var next: WebResponseScenario = Success
+
+    fun nextState(state : WebResponseScenario) {
+        next = state
+    }
 
     override fun latestNews(): Observable<NewsFeedPayload> {
 
         return when (next) {
             is ConnectionError -> FakeResponses.connectionIssue()
             is ConnectionTimeout -> FakeResponses.requestTimeout()
-            is InternalServer -> FakeResponses.internalServerError()
+            is NoInternet -> FakeResponses.noInternet()
+            is InternalServerError -> FakeResponses.internalServerError()
             is ClientError -> FakeResponses.clientError()
             is NotFound -> FakeResponses.notFound()
             is Success -> FakeResponses.newsFeed()
@@ -27,11 +32,12 @@ object FakeWebService : UOLWebService {
 
 }
 
-sealed class NextState {
-    object ConnectionError : NextState()
-    object ConnectionTimeout : NextState()
-    object InternalServer : NextState()
-    object NotFound : NextState()
-    object ClientError : NextState()
-    object Success : NextState()
+sealed class WebResponseScenario {
+    object ConnectionError : WebResponseScenario()
+    object ConnectionTimeout : WebResponseScenario()
+    object NoInternet : WebResponseScenario()
+    object InternalServerError : WebResponseScenario()
+    object NotFound : WebResponseScenario()
+    object ClientError : WebResponseScenario()
+    object Success : WebResponseScenario()
 }
