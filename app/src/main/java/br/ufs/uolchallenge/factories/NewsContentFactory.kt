@@ -7,10 +7,9 @@ import br.ufs.uolchallenge.presentation.detail.NewsContentPresenter
  */
 object NewsContentFactory {
 
-    operator fun invoke(passiveView: Any): NewsContentPresenter {
-        val coordinator = BehaviorsFactory(passiveView)
+    operator fun invoke(): NewsContentPresenter {
         val infrastructure = InfrastructureFactory.newsContent()
-        return NewsContentPresenter(infrastructure, coordinator)
+        return NewsContentPresenter(infrastructure)
     }
 
 }

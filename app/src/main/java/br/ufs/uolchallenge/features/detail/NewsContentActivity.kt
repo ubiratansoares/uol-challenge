@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import br.ufs.uolchallenge.R
+import br.ufs.uolchallenge.factories.BehaviorsFactory
 import br.ufs.uolchallenge.factories.NewsContentFactory
 import br.ufs.uolchallenge.presentation.detail.NewsContentView
 import br.ufs.uolchallenge.util.Navigator
@@ -31,7 +32,8 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
     val errorMessage by bindView<TextView>(R.id.errorMessage)
     val fab by bindView<FloatingActionButton>(R.id.shareButton)
 
-    val presenter by lazy { NewsContentFactory(this) }
+    val coordinator by lazy {BehaviorsFactory(this)}
+    val presenter by lazy { NewsContentFactory() }
 
     lateinit var subscription: Disposable
 
@@ -121,13 +123,15 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
     private fun setupViews() {
         fab.setOnClickListener { share() }
         webView.settings.javaScriptEnabled = false
+        webView.webViewClient = presenter.webViewClient()
     }
 
     private fun loadNews() {
-        webView.loadUrl(viewURL)
+        Log.v(TAG, viewURL)
 
         subscription =
                 presenter.loadNews()
+                        .compose(coordinator)
                         .subscribe(
                                 { Log.v(TAG, it.toString()) },
                                 {
@@ -139,6 +143,9 @@ class NewsContentActivity : AppCompatActivity(), NewsContentView {
                                     Log.v(TAG, "DONE")
                                 }
                         )
+
+        webView.loadUrl(viewURL)
+
     }
 
     private fun releaseSubscriptions() {

@@ -1,6 +1,7 @@
 package br.ufs.uolchallenge.features.feed
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,6 +81,7 @@ class CardWithImage(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val context = itemView.context
 
     fun bind(model: WithImage) {
+        Log.v("NewsImage", model.visualizationURL)
         titleLabel.text = model.title
         dateLabel.text = model.formmatedDate
         container.setOnClickListener {

@@ -22,8 +22,9 @@ class ImageScalerTests {
                 "2b/2017/09/05/yaya-banhoro-burkina-faso-1504648624490_142x100.jpg"
 
         val scaled = scaler.resize(image)
-        assertThat(scaled).contains(ImageScaler.DEFAULT_SIZE)
-        assertThat(scaled).doesNotContain("142x100")
+        assertThat(scaled)
+                .contains(ImageScaler.DEFAULT_SIZE)
+                .doesNotContain("142x100")
     }
 
 }
